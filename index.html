@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -437,11 +438,57 @@
     .stats{grid-template-columns:repeat(2,1fr)}
     .rev-grid{grid-template-columns:1fr;gap:24px}
   }
+
+  /* ---------- Enhancements: account, currency, gender, polish ---------- */
+  .announce{background:linear-gradient(100deg,#26241F,#40301F 50%,#26241F)}
+  .btn{transition:transform .2s ease,box-shadow .2s ease,background .25s ease,color .25s ease,border-color .25s ease}
+  .btn:hover{transform:translateY(-1px)}
+  .btn:active{transform:translateY(0)}
+  .card{transition:transform .35s ease,box-shadow .35s ease}
+  .card:hover{transform:translateY(-4px);box-shadow:0 1px 2px rgba(0,0,0,.04),0 16px 32px rgba(44,44,43,.09)}
+  .pdp-ph img{transition:filter .45s ease,opacity .28s ease}
+  .mail-card{max-width:560px;max-height:84vh;overflow:auto}
+  .mail-meta{font-size:13px;color:#6F6A63;border-bottom:1px solid #E7E0D3;padding-bottom:12px;margin-bottom:16px;display:grid;gap:4px}
+  .mail-meta b{color:#2C2C2B}
+  .toast[data-view-mail]{cursor:pointer;pointer-events:auto;text-decoration:underline;text-underline-offset:4px}
+  .cur-btn{border:1px solid var(--line);background:transparent;border-radius:999px;font-size:12.5px;padding:5px 11px;cursor:pointer;color:var(--ink-soft);letter-spacing:.02em;white-space:nowrap}
+  .cur-btn:hover{border-color:var(--terra);color:var(--terra)}
+  .acct-wrap{position:relative;display:flex}
+  .acct-chip{width:28px;height:28px;border-radius:50%;background:var(--terra);color:#FFFDF8;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center}
+  .acct-menu{position:absolute;right:0;top:46px;background:#FFFDF8;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 32px rgba(0,0,0,.10);min-width:210px;padding:8px;display:none;z-index:60}
+  .acct-menu.open{display:block}
+  .acct-menu p{font-size:12.5px;color:var(--ink-soft);padding:8px 10px 6px;border-bottom:1px solid var(--line);margin-bottom:6px}
+  .acct-menu p b{display:block;color:var(--ink);font-size:14px;margin-top:2px}
+  .acct-menu a,.acct-menu button{display:block;width:100%;text-align:left;padding:9px 10px;border:0;background:none;font-size:14px;border-radius:8px;cursor:pointer;color:var(--ink)}
+  .acct-menu a:hover,.acct-menu button:hover{background:var(--cream)}
+  .auth-ov{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;background:rgba(44,44,43,.45);backdrop-filter:blur(4px);padding:20px}
+  .auth-ov.open{display:flex}
+  .auth-card{background:var(--canvas);border-radius:16px;max-width:430px;width:100%;padding:34px 30px 28px;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.22);animation:authIn .3s ease}
+  @keyframes authIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .auth-x{position:absolute;top:12px;right:14px;background:none;border:0;font-size:24px;cursor:pointer;color:var(--ink-soft);line-height:1}
+  .auth-card h2{font-family:Georgia,serif;font-weight:400;font-size:27px;margin-bottom:6px}
+  .auth-sub{color:var(--ink-soft);font-size:14px;margin-bottom:18px;line-height:1.5}
+  .auth-tabs{display:flex;gap:4px;margin-bottom:18px;background:var(--sand);padding:4px;border-radius:999px}
+  .auth-tabs button{flex:1;border:0;background:none;padding:9px 0;border-radius:999px;font-size:14px;cursor:pointer;color:var(--ink-soft)}
+  .auth-tabs button.active{background:#FFFDF8;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.10);font-weight:600}
+  .auth-msg{font-size:13px;margin:0 0 10px;min-height:16px}
+  .auth-msg.err{color:#B3261E}
+  .auth-alt{font-size:12.5px;color:var(--ink-soft);text-align:center;margin-top:14px}
+  .gender-band{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .g-card{position:relative;border-radius:var(--radius);overflow:hidden;min-height:360px;display:flex;align-items:flex-end}
+  .g-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
+  .g-card:hover img{transform:scale(1.045)}
+  .g-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,10,0) 42%,rgba(20,16,10,.58))}
+  .g-copy{position:relative;z-index:1;padding:26px;color:#FFFDF8}
+  .g-copy h3{font-family:Georgia,serif;font-weight:400;font-size:28px;margin-bottom:6px}
+  .g-copy span{font-size:14px;border-bottom:1px solid rgba(255,253,248,.75);padding-bottom:2px}
+  @media(max-width:640px){.gender-band{grid-template-columns:1fr}.g-card{min-height:250px}}
+  @media(max-width:480px){.cur-btn{display:none}.nav-right{gap:2px}.nav-right .icon-btn{width:36px;height:36px;min-width:36px;padding:6px}}
 </style>
 </head>
 <body>
 
-<div class="announce">Free shipping over $120 · Free repairs for life · Code <b>SUNNY10</b> for 10% off your first order</div>
+<div class="announce">Free shipping over <span data-m="120">$120</span> · Free repairs for life · Code <b>SUNNY10</b> for 10% off your first order</div>
 
 <header>
   <div class="wrap nav">
@@ -449,6 +496,8 @@
     <nav aria-label="Main">
       <ul class="nav-links">
         <li><a href="#/shop" data-nav="shop">Shop</a></li>
+        <li><a href="#/shop/women" data-nav="women">Women</a></li>
+        <li><a href="#/shop/men" data-nav="men">Men</a></li>
         <li><a href="#/collection" data-nav="collection">Collection</a></li>
         <li><a href="#/story" data-nav="story">Our story</a></li>
         <li><a href="#/values" data-nav="values">Values</a></li>
@@ -456,6 +505,11 @@
       </ul>
     </nav>
     <div class="nav-right">
+      <button class="cur-btn" id="cur-btn" aria-label="Switch currency" title="Switch currency">$ USD</button>
+      <div class="acct-wrap" id="acct-wrap">
+        <button class="icon-btn" id="acct-btn" aria-label="Account"></button>
+        <div class="acct-menu" id="acct-menu"></div>
+      </div>
       <button class="icon-btn" data-open-search aria-label="Search">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="9" r="6"/><path d="M13.5 13.5L18 18"/></svg>
       </button>
@@ -475,11 +529,15 @@
   <div class="drawer" id="drawer">
     <ul>
       <li><a href="#/shop" data-nav="shop">Shop</a></li>
+      <li><a href="#/shop/women" data-nav="women">Women</a></li>
+      <li><a href="#/shop/men" data-nav="men">Men</a></li>
       <li><a href="#/collection" data-nav="collection">Collection</a></li>
       <li><a href="#/story" data-nav="story">Our story</a></li>
       <li><a href="#/values" data-nav="values">Values</a></li>
       <li><a href="#/journal" data-nav="journal">Journal</a></li>
       <li><a href="#/wishlist" data-nav="wishlist">Wishlist</a></li>
+      <li><a href="#" data-open-auth="signin">Sign in / Create account</a></li>
+      <li><a href="#" data-toggle-cur>Switch currency (₹ / $)</a></li>
     </ul>
   </div>
 </header>
@@ -525,6 +583,25 @@
       <div><b>150+</b><span>Styles in the shop</span></div>
       <div><b>4.8 ★</b><span>Average rating</span></div>
       <div><b>40+</b><span>Countries shipped</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>Made for her. Made for him.</h2>
+        <a class="sec-link" href="#/shop">Shop everything →</a>
+      </div>
+      <div class="gender-band reveal">
+        <a class="g-card" href="#/shop/women">
+          <img data-img="dress" alt="Terracotta linen midi dress on a wooden hanger against a sunlit plaster wall">
+          <div class="g-copy"><h3>Women</h3><span>Shop the women’s edit →</span></div>
+        </a>
+        <a class="g-card" href="#/shop/men">
+          <img data-img="sage" alt="A relaxed sage cotton shirt in warm sunlight">
+          <div class="g-copy"><h3>Men</h3><span>Shop the men’s edit →</span></div>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -642,7 +719,7 @@
     <div class="wrap">
       <span class="eyebrow">Shop</span>
       <h1>All pieces</h1>
-      <p>150+ sunny styles, loved by over a million shoppers. Free shipping over $120, free returns for 60 days, free repairs forever.</p>
+      <p>150+ sunny styles, loved by over a million shoppers. Free shipping over <span data-m="120">$120</span>, free returns for 60 days, free repairs forever.</p>
     </div>
   </div>
 
@@ -651,6 +728,12 @@
       <div class="shop-layout">
         <aside class="filters" id="filters" aria-label="Product filters">
           <div class="f-head"><h2>Filters</h2><button class="f-clear" data-clear-filters>Clear all</button></div>
+          <details class="f-group" open>
+            <summary>Shop for</summary>
+            <label><input type="radio" name="fgender" data-fgender="all" checked> Everyone</label>
+            <label><input type="radio" name="fgender" data-fgender="women"> Women</label>
+            <label><input type="radio" name="fgender" data-fgender="men"> Men</label>
+          </details>
           <details class="f-group" open>
             <summary>Category</summary>
             <label><input type="checkbox" data-fcat="shirts"> Shirts <span class="f-n" data-count="shirts"></span></label>
@@ -662,10 +745,10 @@
           <details class="f-group" open>
             <summary>Price</summary>
             <label><input type="radio" name="fprice" data-fprice="all" checked> All prices</label>
-            <label><input type="radio" name="fprice" data-fprice="0-75"> Under $75</label>
-            <label><input type="radio" name="fprice" data-fprice="75-100"> $75 – $100</label>
-            <label><input type="radio" name="fprice" data-fprice="100-140"> $100 – $140</label>
-            <label><input type="radio" name="fprice" data-fprice="140-999"> $140 and up</label>
+            <label><input type="radio" name="fprice" data-fprice="0-75"> Under <span data-m="75">$75</span></label>
+            <label><input type="radio" name="fprice" data-fprice="75-100"> <span data-m="75">$75</span> – <span data-m="100">$100</span></label>
+            <label><input type="radio" name="fprice" data-fprice="100-140"> <span data-m="100">$100</span> – <span data-m="140">$140</span></label>
+            <label><input type="radio" name="fprice" data-fprice="140-999"> <span data-m="140">$140</span> and up</label>
           </details>
           <details class="f-group" open>
             <summary>Discount</summary>
@@ -988,6 +1071,19 @@
   <div class="search-results" id="search-results"></div>
 </div>
 
+<div class="auth-ov" id="auth-ov" role="dialog" aria-modal="true" aria-label="Account">
+  <div class="auth-card">
+    <button class="auth-x" data-close-auth aria-label="Close">×</button>
+    <div id="auth-body"></div>
+  </div>
+</div>
+
+<div class="auth-ov" id="mail-ov" role="dialog" aria-modal="true" aria-label="Email preview">
+  <div class="auth-card mail-card">
+    <button class="auth-x" data-close-mail aria-label="Close">×</button>
+    <div id="mail-body"></div>
+  </div>
+</div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -998,7 +1094,7 @@ document.querySelectorAll('img[data-img]').forEach(i => { i.src = imgSrc(i.datas
 /* ================= Data ================= */
 const PRODUCTS = [
   {
-    id:'everyday-linens', name:'The Everyday Linens', price:88, img:'stack', cat:'shirts', tag:'Bestseller',
+    id:'everyday-linens', name:'The Everyday Linens', price:88, img:'stack', cat:'shirts', gender:'unisex', tag:'Bestseller',
     rating:4.8, reviews:214, short:'Shirts in cream, sage & clay',
     alt:'Folded linen shirts in cream, sage and clay on a travertine table',
     colors:[['Cream','#EFE6D4'],['Sage','#A9B49B'],['Clay','#B65C36']],
@@ -1007,7 +1103,7 @@ const PRODUCTS = [
     fabric:'100% European flax linen, garment-washed for softness. Corozo-nut buttons. Machine wash cold, line dry, embrace the wrinkle.'
   },
   {
-    id:'breeze-shirt', name:'The Breeze Shirt', price:96, img:'sage', cat:'shirts', tag:'New in',
+    id:'breeze-shirt', name:'The Breeze Shirt', price:96, img:'sage', cat:'shirts', gender:'men', tag:'New in',
     rating:4.7, reviews:96, short:'Featherweight cotton, sage',
     alt:'A laughing model in a relaxed sage cotton shirt walking past a sunlit white wall',
     colors:[['Sage','#A9B49B'],['Cream','#EFE6D4']],
@@ -1016,7 +1112,7 @@ const PRODUCTS = [
     fabric:'100% organic cotton voile, GOTS-certified low-impact dye. Machine wash cold, line dry.'
   },
   {
-    id:'amara-dress', name:'The Amara Dress', price:148, img:'dress', cat:'dresses', tag:'New in',
+    id:'amara-dress', name:'The Amara Dress', price:148, img:'dress', cat:'dresses', gender:'women', tag:'New in',
     rating:4.9, reviews:58, short:'Clay linen, midi length',
     alt:'Terracotta linen midi dress on a wooden hanger against a sunlit plaster wall',
     colors:[['Clay','#B65C36'],['Cream','#EFE6D4']],
@@ -1025,7 +1121,7 @@ const PRODUCTS = [
     fabric:'100% European flax linen in clay. Side seam pockets. Machine wash cold, line dry.'
   },
   {
-    id:'sol-knit', name:'The Sol Knit', price:132, img:'knit', cat:'knits',
+    id:'sol-knit', name:'The Sol Knit', price:132, img:'knit', cat:'knits', gender:'unisex',
     rating:4.8, reviews:41, short:'Undyed cotton, hand-finished',
     alt:'Folded cream chunky-knit cotton sweater on a travertine bench in morning light',
     colors:[['Natural','#EDE4D2']],
@@ -1034,7 +1130,7 @@ const PRODUCTS = [
     fabric:'100% undyed organic cotton, hand-finished. Hand wash cold, dry flat.'
   },
   {
-    id:'harbor-trouser', name:'The Harbor Trouser', price:104, img:'trousers', cat:'trousers',
+    id:'harbor-trouser', name:'The Harbor Trouser', price:104, img:'trousers', cat:'trousers', gender:'women',
     rating:4.6, reviews:77, short:'Wide-leg linen, cream',
     alt:'Cream wide-leg linen trousers draped over a wooden chair in a sunlit room',
     colors:[['Cream','#EFE6D4'],['Sage','#A9B49B']],
@@ -1043,7 +1139,7 @@ const PRODUCTS = [
     fabric:'100% European flax linen, mid-weight. Two deep side pockets. Machine wash cold, line dry.'
   },
   {
-    id:'handwoven-wrap', name:'The Handwoven Wrap', price:120, img:'fabric', cat:'accessories', tag:'Small batch',
+    id:'handwoven-wrap', name:'The Handwoven Wrap', price:120, img:'fabric', cat:'accessories', gender:'unisex', tag:'Small batch',
     rating:5.0, reviews:23, short:'Sun-dyed, one at a time',
     alt:'Hands holding handwoven golden fabric glowing in sunlight',
     colors:[['Golden','#D9A253']],
@@ -1100,6 +1196,7 @@ const PRODUCTS = [
       PRODUCTS.push({
         id, name: 'The ' + adj + ' ' + type, price, mrp, off: Math.round((1 - price / mrp) * 100),
         img: c.imgs[Math.floor(r() * c.imgs.length)], cat,
+        gender: cat === 'dresses' ? 'women' : (cat === 'accessories' ? 'unisex' : ['women','men','unisex'][Math.floor(r() * 3)]),
         tag: r() < 0.22 ? TAGS[Math.floor(r() * TAGS.length)] : null,
         rating: Math.min(5, Math.round((3.9 + r()) * 10) / 10),
         reviews: Math.floor(30 + r() * 4300),
@@ -1122,7 +1219,33 @@ const PRODUCTS = [
 /* ================= State ================= */
 const $ = s => document.querySelector(s);
 const prod = id => PRODUCTS.find(p => p.id === id);
-const money = n => '$' + n;
+/* ---- Currency: shows ₹ automatically for shoppers in India ---- */
+const FX = { USD: { sym: '$', rate: 1, locale: 'en-US' }, INR: { sym: '₹', rate: 84, locale: 'en-IN' } };
+function detectCurrency(){
+  try {
+    const saved = localStorage.getItem('vlora-cur');
+    if (saved && FX[saved]) return saved;
+    const tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || '');
+    if (/Kolkata|Calcutta/i.test(tz)) return 'INR';
+    const langs = [navigator.language].concat(navigator.languages || []);
+    if (langs.some(l => /-IN$/i.test(l || ''))) return 'INR';
+  } catch(e){}
+  return 'USD';
+}
+let CUR = detectCurrency();
+const money = n => FX[CUR].sym + Math.round(n * FX[CUR].rate).toLocaleString(FX[CUR].locale);
+function setCurrency(cur){
+  if (!FX[cur]) return;
+  CUR = cur;
+  try { localStorage.setItem('vlora-cur', cur); } catch(e){}
+  syncCurrencyUI(); renderStatic(); renderBag(); route();
+  showToast(cur === 'INR' ? 'Prices now in ₹ Indian Rupees' : 'Prices now in $ US Dollars');
+}
+function syncCurrencyUI(){
+  const b = $('#cur-btn');
+  if (b) b.textContent = CUR === 'INR' ? '₹ INR' : '$ USD';
+  document.querySelectorAll('[data-m]').forEach(el => { el.textContent = money(+el.dataset.m); });
+}
 function load(k, d){ try { return JSON.parse(localStorage.getItem(k)) || d; } catch(e){ return d; } }
 function persist(){ try { localStorage.setItem('vlora-bag', JSON.stringify(bag)); localStorage.setItem('vlora-wish', JSON.stringify(wish)); } catch(e){} }
 let bag = load('vlora-bag', []);
@@ -1130,7 +1253,7 @@ let wish = load('vlora-wish', []);
 let promo = false;
 let pdpState = { id:null, size:'M', qty:1, color:null };
 let lastOrder = null;
-let shopState = { cats: [], price: null, disc: 0, rate: 0, sort: 'featured', shown: 24 };
+let shopState = { gender: 'all', cats: [], price: null, disc: 0, rate: 0, sort: 'featured', shown: 24 };
 
 const HEART_SVG = '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5C6.5 16.5 3 13.2 3 9.3 3 6.6 5.1 4.5 7.8 4.5c1.7 0 3.2.8 4.2 2.1 1-1.3 2.5-2.1 4.2-2.1 2.7 0 4.8 2.1 4.8 4.8 0 3.9-3.5 7.2-9 11.2z"/></svg>';
 const stars = r => '★'.repeat(Math.round(r)) + '☆'.repeat(5 - Math.round(r));
@@ -1150,18 +1273,18 @@ function updateBadges(){
 }
 let toastTimer = null;
 function showToast(msg){
-  const t = $('#toast'); t.textContent = msg; t.classList.add('show');
+  const t = $('#toast'); delete t.dataset.viewMail; t.textContent = msg; t.classList.add('show');
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
 }
 
 /* ================= Bag ================= */
-function addToBag(id, size, qty){
-  const line = bag.find(l => l.id === id && l.size === size);
-  if (line) line.qty += qty; else bag.push({ id, size, qty });
+function addToBag(id, size, qty, color){
+  const line = bag.find(l => l.id === id && l.size === size && l.color === color);
+  if (line) line.qty += qty; else bag.push({ id, size, qty, color });
   persist(); updateBadges(); renderBag();
   const p = prod(id);
-  showToast(p.name + (size && size !== 'One size' ? ' (' + size + ')' : '') + ' added to your bag');
+  showToast(p.name + (bag.length && arguments[3] ? ' — ' + arguments[3] : '') + (size && size !== 'One size' ? ' (' + size + ')' : '') + ' added to your bag');
   openBag();
 }
 function openBag(){
@@ -1191,7 +1314,7 @@ function renderBag(){
       ${imgHTML(p)}
       <div class="bd-info">
         <h3><a href="#/product/${p.id}" data-close-bag>${p.name}</a></h3>
-        <p class="meta">${l.size && l.size !== 'One size' ? 'Size ' + l.size + ' · ' : ''}${money(p.price)} each</p>
+        <p class="meta">${l.color ? l.color + ' · ' : ''}${l.size && l.size !== 'One size' ? 'Size ' + l.size + ' · ' : ''}${money(p.price)} each</p>
         <div class="bd-line">
           <span class="qty sm"><button data-ql="${i}" data-qd="-1" aria-label="Decrease quantity">−</button><span>${l.qty}</span><button data-ql="${i}" data-qd="1" aria-label="Increase quantity">+</button></span>
           <span class="bd-price">${money(p.price * l.qty)}</span>
@@ -1226,6 +1349,42 @@ function syncHearts(){
 function imgHTML(p, altOverride){
   return `<img src="${imgSrc(p.img)}" alt="${altOverride !== undefined ? altOverride : p.alt}"${p.style ? ` style="${p.style}"` : ''}>`;
 }
+/* ---- Real colorway photos: each color shows an actual photo of cloth in that color ---- */
+const COLOR_PHOTOS = { Cream: 'stack', Natural: 'fabric', Sage: 'sage', Clay: 'dress', Golden: 'knit' };
+function colorPhoto(p, colorName){
+  const base = p.colors[0];
+  if (!colorName || colorName === base[0]) return { img: p.img, style: p.style || '' };
+  const photo = COLOR_PHOTOS[colorName];
+  if (photo && photo !== p.img) return { img: photo, style: '' };
+  return { img: p.img, style: colorStyle(p, colorName) };
+}
+/* ---- Fallback tint for colors without their own photo ---- */
+function hexToHsl(hex){
+  const m = hex.replace('#','');
+  const r = parseInt(m.slice(0,2),16)/255, g = parseInt(m.slice(2,4),16)/255, b = parseInt(m.slice(4,6),16)/255;
+  const mx = Math.max(r,g,b), mn = Math.min(r,g,b), l = (mx+mn)/2;
+  let h = 0, sat = 0;
+  if (mx !== mn) {
+    const d = mx - mn;
+    sat = l > 0.5 ? d/(2-mx-mn) : d/(mx+mn);
+    h = mx === r ? ((g-b)/d + (g < b ? 6 : 0)) : mx === g ? (b-r)/d + 2 : (r-g)/d + 4;
+    h *= 60;
+  }
+  return [h, sat, l];
+}
+function colorStyle(p, colorName){
+  const base = p.colors[0];
+  const sel = p.colors.find(c => c[0] === colorName) || base;
+  const flip = p.style && p.style.indexOf('scaleX(-1)') >= 0 ? ';transform:scaleX(-1)' : '';
+  const baseFilter = p.style ? ((p.style.match(/filter:([^;]+)/) || [,''])[1] || '') : '';
+  if (sel[0] === base[0]) return p.style || '';
+  const a = hexToHsl(base[1]), b = hexToHsl(sel[1]);
+  const dh = Math.round(b[0] - a[0]);
+  const rawS = a[1] > 0.04 ? b[1] / a[1] : 1 + b[1] * 1.5;
+  const ds = Math.min(1.6, Math.max(0.62, Math.sqrt(rawS)));
+  const db = Math.min(1.15, Math.max(0.8, Math.sqrt(b[2] / Math.max(0.05, a[2]))));
+  return 'filter:' + (baseFilter ? baseFilter.trim() + ' ' : '') + 'hue-rotate(' + dh + 'deg) saturate(' + ds.toFixed(2) + ') brightness(' + db.toFixed(2) + ')' + flip;
+}
 const fmtCount = n => n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k' : '' + n;
 function priceHTML(p){
   return `<span class="price">${money(p.price)}${p.mrp > p.price ? ` <s class="mrp">${money(p.mrp)}</s>` : ''}</span>${p.mrp > p.price ? `<em class="off">${p.off}% off</em>` : ''}`;
@@ -1244,6 +1403,7 @@ function cardHTML(p, o = {}){
 }
 function filteredList(){
   let list = PRODUCTS.filter(p =>
+    (shopState.gender === 'all' || p.gender === shopState.gender || p.gender === 'unisex') &&
     (!shopState.cats.length || shopState.cats.includes(p.cat)) &&
     (!shopState.price || (p.price >= shopState.price[0] && p.price <= shopState.price[1])) &&
     (!shopState.disc || p.off >= shopState.disc) &&
@@ -1269,9 +1429,9 @@ function renderShop(){
   $('#load-more').hidden = show.length >= list.length;
 }
 function clearFilters(){
-  shopState.cats = []; shopState.price = null; shopState.disc = 0; shopState.rate = 0; shopState.shown = 24;
+  shopState.gender = 'all'; shopState.cats = []; shopState.price = null; shopState.disc = 0; shopState.rate = 0; shopState.shown = 24;
   document.querySelectorAll('#filters input[type="checkbox"]').forEach(i => { i.checked = false; });
-  document.querySelectorAll('#filters input[type="radio"]').forEach(i => { i.checked = ['all','0'].indexOf(i.dataset.fprice || i.dataset.fdisc || i.dataset.frate) >= 0; });
+  document.querySelectorAll('#filters input[type="radio"]').forEach(i => { i.checked = ['all','0'].indexOf(i.dataset.fprice || i.dataset.fdisc || i.dataset.frate || i.dataset.fgender) >= 0; });
   renderShop();
 }
 
@@ -1338,7 +1498,7 @@ function renderProduct(id){
         <button class="wish-line ${wish.includes(p.id) ? 'on' : ''}" data-wish="${p.id}">${HEART_SVG} <span>Save to wishlist</span></button>
         <div style="margin-top:20px">
           <details class="acc"><summary>Fabric &amp; care</summary><p>${p.fabric}</p></details>
-          <details class="acc"><summary>Shipping &amp; returns</summary><p>Free shipping on orders over $120 (otherwise $8 flat). Free returns for 60 days \u2014 no questions, no drama.</p></details>
+          <details class="acc"><summary>Shipping &amp; returns</summary><p>Free shipping on orders over ${money(120)} (otherwise ${money(8)} flat). Free returns for 60 days \u2014 no questions, no drama.</p></details>
           <details class="acc"><summary>Repairs for life</summary><p>Every Vlora piece comes with free repairs, forever. Send it back and our tailors will bring it back to life.</p></details>
         </div>
       </div>
@@ -1382,7 +1542,7 @@ function renderCheckout(){
     <div class="checkout">
       <form id="checkout-form">
         <h2 class="co-h">Contact</h2>
-        <div class="field"><label for="co-email">Email</label><input id="co-email" type="email" required placeholder="you@example.com"></div>
+        <div class="field"><label for="co-email">Email</label><input id="co-email" type="email" required placeholder="you@example.com" value="${session ? session.email : ''}"></div>
         <h2 class="co-h">Shipping address</h2>
         <div class="form-row">
           <div class="field"><label for="co-fn">First name</label><input id="co-fn" required autocomplete="given-name"></div>
@@ -1409,7 +1569,7 @@ function renderCheckout(){
       </form>
       <aside class="summary">
         <h2>Order summary</h2>
-        ${bag.map(l => { const p = prod(l.id); return `<div class="sum-item">${imgHTML(p, '')}<div><div class="n">${p.name}</div><div class="m">${l.size && l.size !== 'One size' ? 'Size ' + l.size + ' · ' : ''}Qty ${l.qty}</div></div><span class="p">${money(p.price * l.qty)}</span></div>`; }).join('')}
+        ${bag.map(l => { const p = prod(l.id); return `<div class="sum-item">${imgHTML(p, '')}<div><div class="n">${p.name}</div><div class="m">${l.color ? l.color + ' · ' : ''}${l.size && l.size !== 'One size' ? 'Size ' + l.size + ' · ' : ''}Qty ${l.qty}</div></div><span class="p">${money(p.price * l.qty)}</span></div>`; }).join('')}
         <div class="promo-row"><label for="promo-input" class="sr-only">Promo code</label><input id="promo-input" placeholder="Promo code" value="${promo ? 'SUNNY10' : ''}"><button class="btn ghost" type="button" data-apply-promo>Apply</button></div>
         <p class="promo-msg ${promo ? 'ok' : ''}" id="promo-msg">${promo ? 'SUNNY10 applied — 10% off ✓' : ''}</p>
         <div class="sum-line"><span>Subtotal</span><span>${money(t.sub)}</span></div>
@@ -1427,6 +1587,7 @@ function placeOrder(){
     items: bag.map(l => ({ ...l })),
     t
   };
+  sendEmail('order', { to: lastOrder.email, num: lastOrder.num, items: lastOrder.items, t: lastOrder.t });
   bag = []; promo = false; persist(); updateBadges();
   location.hash = '#/confirmation';
 }
@@ -1444,7 +1605,7 @@ function renderConfirmation(){
       <p class="lead">Your order is confirmed and on its sunny way. A receipt is on its way to <b>${o.email}</b>. Estimated delivery: 5–7 days, in plastic-free packaging with a repair kit tucked inside.</p>
       <div class="order-card">
         <p class="num">Order ${o.num}</p>
-        ${o.items.map(l => { const p = prod(l.id); return `<div class="sum-item">${imgHTML(p, '')}<div><div class="n">${p.name}</div><div class="m">${l.size && l.size !== 'One size' ? 'Size ' + l.size + ' · ' : ''}Qty ${l.qty}</div></div><span class="p">${money(p.price * l.qty)}</span></div>`; }).join('')}
+        ${o.items.map(l => { const p = prod(l.id); return `<div class="sum-item">${imgHTML(p, '')}<div><div class="n">${p.name}</div><div class="m">${l.color ? l.color + ' · ' : ''}${l.size && l.size !== 'One size' ? 'Size ' + l.size + ' · ' : ''}Qty ${l.qty}</div></div><span class="p">${money(p.price * l.qty)}</span></div>`; }).join('')}
         ${o.t.disc ? '<div class="sum-line disc"><span>Discount (SUNNY10)</span><span>−' + money(o.t.disc) + '</span></div>' : ''}
         <div class="sum-line"><span>Shipping</span><span>${o.t.ship === 0 ? 'Free' : money(o.t.ship)}</span></div>
         <div class="sum-total"><span>Total</span><span>${money(o.t.total)}</span></div>
@@ -1454,6 +1615,48 @@ function renderConfirmation(){
         <a class="btn ghost" href="#/journal">Read the Journal</a>
       </div>
     </div>`;
+}
+
+/* ================= Email notifications ================= */
+/* Demo mode shows a preview of every email in the browser.
+   To send REAL emails: create a free account at https://www.emailjs.com,
+   add a template with params {{to_email}}, {{subject}}, {{{message_html}}},
+   then fill in the three keys below. */
+const EMAILJS = { publicKey: 'esLK8QhhucfHyxI2W', serviceId: 'service_1bx6goa', templateId: 'template_v7843gi' };
+let lastEmail = null;
+function emailBody(type, d){
+  const wrap = inner => `<div style="font-family:Georgia,serif;background:#FFFDF8;color:#2C2C2B;padding:26px;border:1px solid #E7E0D3;border-radius:12px">
+    <p style="letter-spacing:.35em;font-size:13px;margin:0 0 18px">V L O R A<span style="color:#B65C36">.</span></p>${inner}
+    <p style="font-size:12px;color:#6F6A63;border-top:1px solid #E7E0D3;padding-top:14px;margin-top:22px">Vlora — clothing for the bright side ☀ · You’re receiving this because of activity on your Vlora account.</p></div>`;
+  if (type === 'welcome') return { subject: 'Welcome to Vlora ☀', html: wrap(`<h2 style="font-weight:400;margin:0 0 10px">Welcome, ${d.name}!</h2><p>Your account is ready. Enjoy <b>10% off your first order</b> with code <b style="color:#B65C36">SUNNY10</b>, free shipping over ${money(120)} and free repairs for life.</p><p><a href="#" style="color:#B65C36">Shop the collection →</a></p>`) };
+  if (type === 'signin') return { subject: 'New sign-in to your Vlora account', html: wrap(`<h2 style="font-weight:400;margin:0 0 10px">Hi ${d.name},</h2><p>Your Vlora account was signed in on <b>${new Date().toLocaleString()}</b>.</p><p style="color:#6F6A63">If this wasn’t you, please change your password right away.</p>`) };
+  const rows = d.items.map(l => { const p = prod(l.id); return `<tr><td style="padding:8px 0;border-bottom:1px solid #E7E0D3">${p.name}<br><span style="color:#6F6A63;font-size:13px">${l.color ? l.color + ' · ' : ''}${l.size && l.size !== 'One size' ? 'Size ' + l.size + ' · ' : ''}Qty ${l.qty}</span></td><td style="text-align:right;border-bottom:1px solid #E7E0D3">${money(p.price * l.qty)}</td></tr>`; }).join('');
+  return { subject: `Your Vlora order ${d.num} is confirmed ☀`, html: wrap(`<h2 style="font-weight:400;margin:0 0 10px">Thank you for your order!</h2><p>Order <b>${d.num}</b> is confirmed and will arrive in 5–7 days, in plastic-free packaging with a repair kit inside.</p><table style="width:100%;border-collapse:collapse">${rows}</table>
+    ${d.t.disc ? `<p style="margin:10px 0 0;color:#6E7F63">Discount (SUNNY10): −${money(d.t.disc)}</p>` : ''}
+    <p style="margin:10px 0 0">Shipping: ${d.t.ship === 0 ? 'Free' : money(d.t.ship)}</p>
+    <p style="font-size:18px;margin:6px 0 0"><b>Total: ${money(d.t.total)}</b></p>`) };
+}
+function sendEmail(type, d){
+  if (!d.to) return;
+  const mail = { to: d.to, ...emailBody(type, d), at: new Date().toLocaleString() };
+  lastEmail = mail;
+  if (EMAILJS.publicKey && EMAILJS.serviceId && EMAILJS.templateId) {
+    const doSend = () => { emailjs.init(EMAILJS.publicKey); emailjs.send(EMAILJS.serviceId, EMAILJS.templateId, { to_email: mail.to, subject: mail.subject, message_html: mail.html }); };
+    if (window.emailjs) doSend();
+    else { const sc = document.createElement('script'); sc.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js'; sc.onload = doSend; document.head.appendChild(sc); }
+    return;
+  }
+  console.warn('[Vlora] Email to ' + mail.to + ' was NOT delivered — you are in demo mode. Create a free account at https://www.emailjs.com and fill in the EMAILJS keys near the top of the email section to send real emails.');
+}
+function openMail(){
+  if (!lastEmail) return;
+  $('#mail-body').innerHTML = `<div class="mail-meta"><div><b>To:</b> ${lastEmail.to}</div><div><b>Subject:</b> ${lastEmail.subject}</div><div><b>Sent:</b> ${lastEmail.at}</div></div>` + lastEmail.html;
+  $('#mail-ov').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMail(){
+  $('#mail-ov').classList.remove('open');
+  if (!$('#auth-ov').classList.contains('open')) document.body.style.overflow = '';
 }
 
 /* ================= Search ================= */
@@ -1479,22 +1682,91 @@ function renderSearch(q){
     : '<p class="sr-hint">No matches for \u201c' + q.replace(/</g, '&lt;') + '\u201d \u2014 try \u201clinen\u201d or \u201cdress\u201d.</p>';
 }
 
+/* ================= Account (sign in / sign up) ================= */
+const USER_SVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.4-3.4 4.2-5 7.5-5s6.1 1.6 7.5 5"/></svg>';
+let users = load('vlora-users', {});
+let session = load('vlora-session', null);
+let authMode = 'signin';
+function saveAuth(){ try { localStorage.setItem('vlora-users', JSON.stringify(users)); localStorage.setItem('vlora-session', JSON.stringify(session)); } catch(e){} }
+function firstName(){ return session ? (session.name || session.email).split(' ')[0] : ''; }
+function openAuth(mode){
+  authMode = mode || 'signin';
+  renderAuth();
+  $('#drawer').classList.remove('open');
+  $('#auth-ov').classList.add('open');
+  document.body.classList.add('locked');
+  setTimeout(() => { const f = document.querySelector('#auth-ov input'); if (f) f.focus(); }, 60);
+}
+function closeAuth(){
+  const ov = $('#auth-ov');
+  if (!ov || !ov.classList.contains('open')) return;
+  ov.classList.remove('open');
+  if (!$('#bag-drawer').classList.contains('open') && !$('#search-ov').classList.contains('open')) document.body.classList.remove('locked');
+}
+function renderAuth(){
+  const b = $('#auth-body');
+  if (session) {
+    b.innerHTML = `
+      <h2>Hi, ${firstName()} ☀</h2>
+      <p class="auth-sub">You’re signed in as ${session.email}</p>
+      <a class="btn terra" style="width:100%;margin-bottom:10px" href="#/wishlist" data-close-auth>My wishlist</a>
+      <a class="btn ghost" style="width:100%;margin-bottom:10px" href="#/shop" data-close-auth>Keep shopping</a>
+      <button class="btn ghost" style="width:100%" data-signout>Sign out</button>`;
+    return;
+  }
+  b.innerHTML = `
+    <h2>${authMode === 'signin' ? 'Welcome back' : 'Join the bright side'}</h2>
+    <p class="auth-sub">${authMode === 'signin' ? 'Sign in for faster checkout and your saved wishlist.' : 'Create a free account — your first order gets 10% off with SUNNY10.'}</p>
+    <div class="auth-tabs">
+      <button type="button" class="${authMode === 'signin' ? 'active' : ''}" data-auth-tab="signin">Sign in</button>
+      <button type="button" class="${authMode === 'signup' ? 'active' : ''}" data-auth-tab="signup">Create account</button>
+    </div>
+    <form id="auth-form">
+      ${authMode === 'signup' ? '<div class="field"><label for="au-name">Full name</label><input id="au-name" required placeholder="Your name" autocomplete="name"></div>' : ''}
+      <div class="field"><label for="au-email">Email</label><input id="au-email" type="email" required placeholder="you@example.com" autocomplete="email"></div>
+      <div class="field"><label for="au-pass">Password</label><input id="au-pass" type="password" required minlength="6" placeholder="${authMode === 'signup' ? 'At least 6 characters' : 'Your password'}"></div>
+      <p class="auth-msg" id="auth-msg"></p>
+      <button class="btn terra" style="width:100%" type="submit">${authMode === 'signin' ? 'Sign in' : 'Create account'}</button>
+    </form>
+    <p class="auth-alt">🔒 Demo account — your details never leave this browser.</p>`;
+}
+function syncAccountUI(){
+  const btn = $('#acct-btn'), menu = $('#acct-menu');
+  if (!btn) return;
+  if (session) {
+    btn.innerHTML = '<span class="acct-chip">' + (session.name || session.email).trim()[0].toUpperCase() + '</span>';
+    menu.innerHTML = `<p>Signed in as<b>${session.name || session.email}</b></p><a href="#/wishlist">My wishlist ♥</a><a href="#/shop">Keep shopping</a><button data-signout>Sign out</button>`;
+  } else {
+    btn.innerHTML = USER_SVG;
+    menu.innerHTML = '';
+    menu.classList.remove('open');
+  }
+}
+
 /* ================= Router ================= */
 const NAV_MAP = { shop:'shop', product:'shop', collection:'collection', story:'story', values:'values', journal:'journal', wishlist:'wishlist' };
 function parseRoute(){
   const h = (location.hash || '').replace(/^#\/?/, '');
   if (h.startsWith('product/')) return { view:'product', id: h.slice(8) };
+  if (h === 'shop/women' || h === 'shop/men') return { view:'shop', gender: h.slice(5) };
   const known = ['home','collection','shop','story','values','journal','wishlist','checkout','confirmation'];
   return { view: known.includes(h) ? h : 'home' };
 }
 function route(){
   const r = parseRoute();
   document.querySelectorAll('.view').forEach(v => { v.hidden = (v.id !== 'view-' + r.view); });
-  document.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('active', a.getAttribute('data-nav') === (NAV_MAP[r.view] || '')));
+  const navKey = (r.view === 'shop' && r.gender) ? r.gender : (NAV_MAP[r.view] || '');
+  document.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('active', a.getAttribute('data-nav') === navKey));
   $('#drawer').classList.remove('open');
   $('#menu-btn').setAttribute('aria-expanded', 'false');
-  closeBag(); closeSearch();
-  if (r.view === 'shop') renderShop();
+  closeBag(); closeSearch(); closeAuth();
+  if (r.view === 'shop') {
+    if (r.gender) {
+      shopState.gender = r.gender; shopState.shown = 24;
+      document.querySelectorAll('[data-fgender]').forEach(i => { i.checked = i.dataset.fgender === r.gender; });
+    }
+    renderShop();
+  }
   if (r.view === 'product') renderProduct(r.id);
   if (r.view === 'wishlist') renderWishlist();
   if (r.view === 'checkout') renderCheckout();
@@ -1507,10 +1779,21 @@ window.addEventListener('hashchange', route);
 /* ================= Events ================= */
 document.addEventListener('click', (e) => {
   const t = e.target;
+  if (!t.closest('.acct-wrap')) { const am = $('#acct-menu'); if (am) am.classList.remove('open'); }
+  if (t.closest('#cur-btn')) { setCurrency(CUR === 'INR' ? 'USD' : 'INR'); return; }
+  if (t.closest('[data-toggle-cur]')) { e.preventDefault(); $('#drawer').classList.remove('open'); setCurrency(CUR === 'INR' ? 'USD' : 'INR'); return; }
+  if (t.closest('#acct-btn')) { if (session) { $('#acct-menu').classList.toggle('open'); } else { openAuth('signin'); } return; }
+  const oa = t.closest('[data-open-auth]');
+  if (oa) { e.preventDefault(); openAuth(oa.dataset.openAuth || 'signin'); return; }
+  if (t.closest('[data-close-auth]')) { closeAuth(); return; }
+  if (t.id === 'auth-ov') { closeAuth(); return; }
+  const at = t.closest('[data-auth-tab]');
+  if (at) { authMode = at.dataset.authTab; renderAuth(); return; }
+  if (t.closest('[data-signout]')) { session = null; saveAuth(); syncAccountUI(); renderAuth(); closeAuth(); showToast('Signed out — see you soon ☀'); return; }
   const add = t.closest('[data-add]');
-  if (add) { const p = prod(add.dataset.add); addToBag(p.id, p.sizes.includes('M') ? 'M' : p.sizes[0], 1); return; }
+  if (add) { const p = prod(add.dataset.add); addToBag(p.id, p.sizes.includes('M') ? 'M' : p.sizes[0], 1, p.colors[0][0]); return; }
   const addP = t.closest('[data-add-pdp]');
-  if (addP) { addToBag(addP.dataset.addPdp, pdpState.size, pdpState.qty); return; }
+  if (addP) { addToBag(addP.dataset.addPdp, pdpState.size, pdpState.qty, pdpState.color); return; }
   const wishB = t.closest('[data-wish]');
   if (wishB) { toggleWish(wishB.dataset.wish); return; }
   if (t.closest('[data-open-bag]')) { openBag(); return; }
@@ -1526,7 +1809,7 @@ document.addEventListener('click', (e) => {
   const sz = t.closest('[data-size]');
   if (sz) { pdpState.size = sz.dataset.size; document.querySelectorAll('.size-pill').forEach(b => b.classList.toggle('active', b === sz)); return; }
   const sw = t.closest('[data-color]');
-  if (sw) { pdpState.color = sw.dataset.color; const cn = $('#color-name'); if (cn) cn.textContent = sw.dataset.color; document.querySelectorAll('.swatch').forEach(b => b.classList.toggle('active', b === sw)); return; }
+  if (sw) { pdpState.color = sw.dataset.color; const cn = $('#color-name'); if (cn) cn.textContent = sw.dataset.color; document.querySelectorAll('.swatch').forEach(b => b.classList.toggle('active', b === sw)); const pimg = document.querySelector('.pdp-ph img'); const pp = prod(pdpState.id); if (pimg && pp) { const ph = colorPhoto(pp, pdpState.color); pimg.style.opacity = '0'; setTimeout(() => { pimg.src = imgSrc(ph.img); pimg.setAttribute('style', ph.style || ''); pimg.style.opacity = '1'; }, 290); } return; }
   const chip = t.closest('[data-filter]');
   if (chip) { shopState.filter = chip.dataset.filter; document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === chip)); renderShop(); return; }
   if (t.closest('[data-apply-promo]')) {
@@ -1538,8 +1821,35 @@ document.addEventListener('click', (e) => {
 });
 document.addEventListener('change', e => { if (e.target.id === 'sort') { shopState.sort = e.target.value; renderShop(); } });
 document.addEventListener('input', e => { if (e.target.id === 'search-input') renderSearch(e.target.value); });
-document.addEventListener('submit', e => { if (e.target.id === 'checkout-form') { e.preventDefault(); placeOrder(); } });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeBag(); closeSearch(); } });
+document.addEventListener('submit', e => {
+  if (e.target.id === 'checkout-form') { e.preventDefault(); placeOrder(); return; }
+  if (e.target.id === 'auth-form') {
+    e.preventDefault();
+    const email = $('#au-email').value.trim().toLowerCase();
+    const pass = $('#au-pass').value;
+    const msg = $('#auth-msg');
+    if (authMode === 'signup') {
+      if (users[email]) { msg.textContent = 'That email already has an account — try signing in.'; msg.className = 'auth-msg err'; return; }
+      users[email] = { name: $('#au-name').value.trim(), pass };
+      session = { email, name: users[email].name };
+      saveAuth(); syncAccountUI(); closeAuth();
+      showToast('Welcome to Vlora, ' + firstName() + ' ☀');
+      setTimeout(() => sendEmail('welcome', { to: email, name: session.name || firstName() }), 1600);
+    } else {
+      const u = users[email];
+      if (!u || u.pass !== pass) { msg.textContent = 'That email and password don’t match.'; msg.className = 'auth-msg err'; return; }
+      session = { email, name: u.name };
+      saveAuth(); syncAccountUI(); closeAuth();
+      showToast('Welcome back, ' + firstName() + ' ☀');
+      setTimeout(() => sendEmail('signin', { to: email, name: session.name || firstName() }), 1600);
+    }
+  }
+});
+document.addEventListener('click', e => {
+  const el = e.target;
+  if (el.closest('[data-close-mail]') || el.id === 'mail-ov') closeMail();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeBag(); closeSearch(); closeAuth(); closeMail(); } });
 $('#menu-btn').addEventListener('click', () => {
   const open = $('#drawer').classList.toggle('open');
   $('#menu-btn').setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -1558,6 +1868,7 @@ document.addEventListener('change', e => {
   else if (el.matches('[data-fprice]')) { const v = el.dataset.fprice; shopState.price = v === 'all' ? null : v.split('-').map(Number); }
   else if (el.matches('[data-fdisc]')) { shopState.disc = +el.dataset.fdisc; }
   else if (el.matches('[data-frate]')) { shopState.rate = +el.dataset.frate; }
+  else if (el.matches('[data-fgender]')) { shopState.gender = el.dataset.fgender; }
   else { return; }
   shopState.shown = 24;
   renderShop();
@@ -1583,8 +1894,13 @@ function revealVisible(){
 }
 
 /* ================= Init ================= */
-$('#home-grid').innerHTML = PRODUCTS.slice(0, 3).map(p => cardHTML(p)).join('');
-$('#collection-grid').innerHTML = PRODUCTS.slice(0, 6).map(p => cardHTML(p)).join('');
+function renderStatic(){
+  $('#home-grid').innerHTML = PRODUCTS.slice(0, 3).map(p => cardHTML(p)).join('');
+  $('#collection-grid').innerHTML = PRODUCTS.slice(0, 6).map(p => cardHTML(p)).join('');
+}
+renderStatic();
+syncCurrencyUI();
+syncAccountUI();
 updateBadges();
 renderBag();
 route();
