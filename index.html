@@ -1618,11 +1618,13 @@ function renderConfirmation(){
 }
 
 /* ================= Email notifications ================= */
-/* Demo mode shows a preview of every email in the browser.
-   To send REAL emails: create a free account at https://www.emailjs.com,
-   add a template with params {{to_email}}, {{subject}}, {{{message_html}}},
-   then fill in the three keys below. */
-const EMAILJS = { publicKey: 'esLK8QhhucfHyxI2W', serviceId: 'service_1bx6goa', templateId: 'template_v7843gi' };
+/* No email keys live in this website at all — not here, not in any file you publish.
+   Emails are sent through your private Cloudflare Worker (see vlora-email-worker.js),
+   which keeps the EmailJS keys as encrypted environment variables on Cloudflare.
+   After deploying the Worker, paste its URL below, e.g.
+     const EMAIL_ENDPOINT = 'https://vlora-email.YOUR-SUBDOMAIN.workers.dev';
+   The Worker URL is safe to publish — it contains no secrets. */
+const EMAIL_ENDPOINT = 'https://vlora-email.neerajraopotlapalli5.workers.dev/';
 let lastEmail = null;
 function emailBody(type, d){
   const wrap = inner => `<div style="font-family:Georgia,serif;background:#FFFDF8;color:#2C2C2B;padding:26px;border:1px solid #E7E0D3;border-radius:12px">
@@ -1640,13 +1642,11 @@ function sendEmail(type, d){
   if (!d.to) return;
   const mail = { to: d.to, ...emailBody(type, d), at: new Date().toLocaleString() };
   lastEmail = mail;
-  if (EMAILJS.publicKey && EMAILJS.serviceId && EMAILJS.templateId) {
-    const doSend = () => { emailjs.init(EMAILJS.publicKey); emailjs.send(EMAILJS.serviceId, EMAILJS.templateId, { to_email: mail.to, subject: mail.subject, message_html: mail.html }); };
-    if (window.emailjs) doSend();
-    else { const sc = document.createElement('script'); sc.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js'; sc.onload = doSend; document.head.appendChild(sc); }
+  if (EMAIL_ENDPOINT) {
+    fetch(EMAIL_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ to_email: mail.to, subject: mail.subject, message_html: mail.html }) }).catch(err => console.warn('[Vlora] Email could not be sent:', err));
     return;
   }
-  console.warn('[Vlora] Email to ' + mail.to + ' was NOT delivered — you are in demo mode. Create a free account at https://www.emailjs.com and fill in the EMAILJS keys near the top of the email section to send real emails.');
+  console.warn('[Vlora] Email to ' + mail.to + ' was NOT delivered — demo mode. Deploy vlora-email-worker.js on Cloudflare (free) and paste your Worker URL into EMAIL_ENDPOINT near the top of the email section.');
 }
 function openMail(){
   if (!lastEmail) return;
