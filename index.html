@@ -527,7 +527,7 @@
 </head>
 <body>
 
-<div class="announce">Free shipping over <span data-m="120">$120</span> · Free repairs for life · Code <b>SUNNY10</b> for 10% off your first order</div>
+<div class="announce">Free shipping over <span data-m="120">₹10,080</span> · Free repairs for life · Code <b>SUNNY10</b> for 10% off your first order</div>
 
 <header>
   <div class="wrap nav">
@@ -545,7 +545,6 @@
     </nav>
     <div class="nav-right">
       <button class="icon-btn" id="theme-btn" aria-label="Toggle dark mode" title="Toggle dark mode">&#127769;</button>
-      <button class="cur-btn" id="cur-btn" aria-label="Switch currency" title="Switch currency">$ USD</button>
       <div class="acct-wrap" id="acct-wrap">
         <button class="icon-btn" id="acct-btn" aria-label="Account"></button>
         <div class="acct-menu" id="acct-menu"></div>
@@ -577,8 +576,7 @@
       <li><a href="#/journal" data-nav="journal">Journal</a></li>
       <li><a href="#/wishlist" data-nav="wishlist">Wishlist</a></li>
       <li><a href="#" data-open-auth="signin">Sign in / Create account</a></li>
-      <li><a href="#" data-toggle-cur>Switch currency (₹ / $)</a></li>
-    </ul>
+          </ul>
   </div>
 </header>
 
@@ -769,7 +767,7 @@
     <div class="wrap">
       <span class="eyebrow">Shop</span>
       <h1>All pieces</h1>
-      <p>150+ sunny styles, loved by over a million shoppers. Free shipping over <span data-m="120">$120</span>, free returns for 60 days, free repairs forever.</p>
+      <p>150+ sunny styles, loved by over a million shoppers. Free shipping over <span data-m="120">₹10,080</span>, free returns for 60 days, free repairs forever.</p>
     </div>
   </div>
 
@@ -795,10 +793,10 @@
           <details class="f-group" open>
             <summary>Price</summary>
             <label><input type="radio" name="fprice" data-fprice="all" checked> All prices</label>
-            <label><input type="radio" name="fprice" data-fprice="0-75"> Under <span data-m="75">$75</span></label>
-            <label><input type="radio" name="fprice" data-fprice="75-100"> <span data-m="75">$75</span> – <span data-m="100">$100</span></label>
-            <label><input type="radio" name="fprice" data-fprice="100-140"> <span data-m="100">$100</span> – <span data-m="140">$140</span></label>
-            <label><input type="radio" name="fprice" data-fprice="140-999"> <span data-m="140">$140</span> and up</label>
+            <label><input type="radio" name="fprice" data-fprice="0-75"> Under <span data-m="75">₹6,300</span></label>
+            <label><input type="radio" name="fprice" data-fprice="75-100"> <span data-m="75">₹6,300</span> – <span data-m="100">₹8,400</span></label>
+            <label><input type="radio" name="fprice" data-fprice="100-140"> <span data-m="100">₹8,400</span> – <span data-m="140">₹11,760</span></label>
+            <label><input type="radio" name="fprice" data-fprice="140-999"> <span data-m="140">₹11,760</span> and up</label>
           </details>
           <details class="f-group" open>
             <summary>Discount</summary>
@@ -1301,7 +1299,7 @@ function detectCurrency(){
   } catch(e){}
   return 'USD';
 }
-let CUR = detectCurrency();
+let CUR = 'INR'; // INR-only store
 const money = n => FX[CUR].sym + Math.round(n * FX[CUR].rate).toLocaleString(FX[CUR].locale);
 function setCurrency(cur){
   if (!FX[cur]) return;
@@ -1988,8 +1986,6 @@ document.addEventListener('click', (e) => {
   const t = e.target;
   if (!t.closest('.acct-wrap')) { const am = $('#acct-menu'); if (am) am.classList.remove('open'); }
   if (t.closest('#theme-btn')) { const dark = !document.body.classList.contains('dark'); try { localStorage.setItem('vlora-theme', dark ? 'dark' : 'light'); } catch(err){} applyTheme(); showToast(dark ? 'Dark mode on \uD83C\uDF19' : 'Light mode on \u2600'); return; }
-  if (t.closest('#cur-btn')) { setCurrency(CUR === 'INR' ? 'USD' : 'INR'); return; }
-  if (t.closest('[data-toggle-cur]')) { e.preventDefault(); $('#drawer').classList.remove('open'); setCurrency(CUR === 'INR' ? 'USD' : 'INR'); return; }
   if (t.closest('#acct-btn')) { if (session) { $('#acct-menu').classList.toggle('open'); } else { openAuth('signin'); } return; }
   const oa = t.closest('[data-open-auth]');
   if (oa) { e.preventDefault(); openAuth(oa.dataset.openAuth || 'signin'); return; }
