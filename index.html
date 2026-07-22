@@ -394,7 +394,7 @@
   .pdp-price .off{font-size:15px}
   .tax-note{font-size:13px;color:var(--ink-soft);margin:4px 0 18px}
   .shop-layout{display:grid;grid-template-columns:230px 1fr;gap:44px;align-items:start}
-  .filters{position:sticky;top:96px}
+  .filters{position:sticky;top:90px;max-height:calc(100vh - 106px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-right:8px}
   .f-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
   .f-head h2{font-size:17px;margin:0}
   .f-clear{background:none;border:0;color:var(--terra);font:inherit;font-size:13px;font-weight:700;cursor:pointer}
@@ -432,7 +432,7 @@
   .rev-card p{font-size:14.5px;color:var(--ink-soft);margin-top:8px;max-width:640px}
   @media (max-width:920px){
     .shop-layout{grid-template-columns:1fr;gap:8px}
-    .filters{display:none;position:static;margin-bottom:18px}
+    .filters{display:none;position:static;margin-bottom:18px;max-height:none;overflow:visible;padding-right:0}
     .filters.open{display:block}
     .f-toggle{display:inline-flex}
     .stats{grid-template-columns:repeat(2,1fr)}
@@ -484,6 +484,45 @@
   .g-copy span{font-size:14px;border-bottom:1px solid rgba(255,253,248,.75);padding-bottom:2px}
   @media(max-width:640px){.gender-band{grid-template-columns:1fr}.g-card{min-height:250px}}
   @media(max-width:480px){.cur-btn{display:none}.nav-right{gap:2px}.nav-right .icon-btn{width:36px;height:36px;min-width:36px;padding:6px}}
+  /* ---------- Shop search ---------- */
+  .shop-search{flex:1;min-width:150px;max-width:320px}
+  .shop-search input{width:100%;min-height:44px;border:1px solid #C9C2B4;border-radius:999px;padding:8px 16px;background:#fff;font-size:14px;color:var(--ink)}
+  @media(max-width:640px){.shop-search{max-width:none;order:3;flex-basis:100%}}
+  /* ---------- Review form ---------- */
+  .rev-form{border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:20px;background:var(--cream)}
+  .rf-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+  .rf-stars button{border:none;background:none;font-size:24px;line-height:1;cursor:pointer;color:var(--terra);padding:2px}
+  .rev-form textarea{width:100%;min-height:84px;padding:10px 14px;border:1px solid #C9C2B4;border-radius:10px;background:#fff;font-size:15px;color:var(--ink);font-family:inherit;resize:vertical}
+  .rc-badge.you{background:var(--terra);color:#FFFDF8}
+  /* ---------- Order history ---------- */
+  .order-card.ohist{margin:0 0 26px}
+  .oh-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+  .oh-head .num{margin-bottom:0}
+  .oh-date{color:var(--ink-soft);font-size:13px}
+  .oh-badge{margin-left:auto;background:var(--sage);color:#FFFDF8;font-size:12px;font-weight:600;padding:3px 11px;border-radius:999px}
+  /* ---------- Stock & delivery notes ---------- */
+  .stock-note{color:#B3452E;font-size:13.5px;font-weight:600;margin-top:8px}
+  .deliv-note{font-size:13.5px;color:var(--ink-soft);margin-top:4px}
+  .btn[disabled]{opacity:.45;cursor:not-allowed;pointer-events:none}
+  /* ---------- Back to top ---------- */
+  #top-btn{position:fixed;right:22px;bottom:26px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--canvas);color:var(--ink);font-size:18px;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.14);opacity:0;pointer-events:none;transition:opacity .25s;z-index:60}
+  #top-btn.show{opacity:1;pointer-events:auto}
+  /* ---------- Dark mode ---------- */
+  body.dark{--ink:#ECE8E0;--ink-soft:#A9A296;--canvas:#181715;--cream:#211F1C;--sand:#2A2621;--line:#3B372F}
+  body.dark header{background:rgba(24,23,21,.92)}
+  body.dark .hero-scrim{background:linear-gradient(100deg,rgba(24,23,21,.94) 0%,rgba(24,23,21,.76) 30%,rgba(24,23,21,0) 62%)}
+  body.dark .announce,body.dark .news{background:#26231F}
+  body.dark .btn:not(.terra):not(.ghost){color:#181715}
+  body.dark .btn:not(.terra):not(.ghost):hover{background:#FFFDF8}
+  body.dark .toast{color:#181715}
+  body.dark .chip.active,body.dark .size-pill.active{color:#181715}
+  body.dark .sort-wrap select,body.dark .field input,body.dark .field select,body.dark .promo-row input,body.dark .rev-form textarea,body.dark .shop-search input{background:#211F1C;border-color:#3B372F;color:var(--ink)}
+  body.dark .value{background:#211F1C}
+  body.dark .acct-menu{background:#211F1C}
+  body.dark .auth-tabs button.active{background:#3B372F;color:var(--ink)}
+  body.dark .heart,body.dark .tag{background:rgba(33,31,28,.9);color:var(--ink)}
+  body.dark .rate-chip{background:rgba(33,31,28,.94);color:var(--ink)}
+  body.dark #top-btn{background:#211F1C;box-shadow:0 8px 24px rgba(0,0,0,.5)}
 </style>
 </head>
 <body>
@@ -505,6 +544,7 @@
       </ul>
     </nav>
     <div class="nav-right">
+      <button class="icon-btn" id="theme-btn" aria-label="Toggle dark mode" title="Toggle dark mode">&#127769;</button>
       <button class="cur-btn" id="cur-btn" aria-label="Switch currency" title="Switch currency">$ USD</button>
       <div class="acct-wrap" id="acct-wrap">
         <button class="icon-btn" id="acct-btn" aria-label="Account"></button>
@@ -612,6 +652,16 @@
         <a class="sec-link" href="#/shop">Shop all pieces →</a>
       </div>
       <div class="grid3" id="home-grid"></div>
+    </div>
+  </section>
+
+  <section id="recent-sec" hidden>
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Recently viewed</h2>
+        <a class="sec-link" href="#/shop">Shop all pieces →</a>
+      </div>
+      <div class="grid3" id="recent-grid"></div>
     </div>
   </section>
 
@@ -762,12 +812,15 @@
             <label><input type="radio" name="frate" data-frate="0" checked> All</label>
             <label><input type="radio" name="frate" data-frate="4.5"> 4.5 ★ and up</label>
             <label><input type="radio" name="frate" data-frate="4"> 4.0 ★ and up</label>
+            <label><input type="radio" name="frate" data-frate="3.5"> 3.5 ★ and up</label>
+            <label><input type="radio" name="frate" data-frate="3"> 3.0 ★ and up</label>
           </details>
         </aside>
         <div>
           <div class="shop-bar reveal">
             <button class="btn ghost f-toggle" data-toggle-filters aria-controls="filters">Filters</button>
             <p class="shop-count" id="shop-count"></p>
+            <div class="shop-search"><label for="shop-q" class="sr-only">Search styles</label><input id="shop-q" type="search" placeholder="Search styles…"></div>
             <div class="sort-wrap">
               <label for="sort">Sort</label>
               <select id="sort">
@@ -824,6 +877,20 @@
 <div class="view" id="view-confirmation" hidden>
   <section>
     <div class="wrap" id="confirm-wrap"></div>
+  </section>
+</div>
+
+<!-- ============ ORDERS ============ -->
+<div class="view" id="view-orders" hidden>
+  <div class="page-head">
+    <div class="wrap">
+      <span class="eyebrow">Account</span>
+      <h1>My orders</h1>
+      <p>Every order you’ve placed on this device, in one sunny place.</p>
+    </div>
+  </div>
+  <section>
+    <div class="wrap" id="orders-wrap"></div>
   </section>
 </div>
 
@@ -1047,6 +1114,8 @@
 
 <!-- ============ BAG DRAWER ============ -->
 <div class="scrim" id="scrim" data-close-bag></div>
+<button id="top-btn" aria-label="Back to top" title="Back to top">↑</button>
+
 <aside class="bag-drawer" id="bag-drawer" role="dialog" aria-label="Shopping bag" aria-hidden="true">
   <div class="bd-head">
     <h2 style="font-family:Georgia,serif;font-weight:400">Your bag <span id="bd-n" style="color:var(--ink-soft);font-size:16px"></span></h2>
@@ -1250,20 +1319,32 @@ function load(k, d){ try { return JSON.parse(localStorage.getItem(k)) || d; } ca
 function persist(){ try { localStorage.setItem('vlora-bag', JSON.stringify(bag)); localStorage.setItem('vlora-wish', JSON.stringify(wish)); } catch(e){} }
 let bag = load('vlora-bag', []);
 let wish = load('vlora-wish', []);
-let promo = false;
+let orders = load('vlora-orders', []);
+let myReviews = load('vlora-reviews', {});
+let recent = load('vlora-recent', []);
+let rfStars = 5;
+const COUPONS = {
+  SUNNY10: { pct: 10, desc: '10% off' },
+  BRIGHT15: { pct: 15, desc: '15% off' },
+  VLORA20: { pct: 20, min: 200, desc: '20% off' },
+  FREESHIP: { pct: 0, ship: true, desc: 'free shipping' }
+};
+let promo = null;
 let pdpState = { id:null, size:'M', qty:1, color:null };
 let lastOrder = null;
-let shopState = { gender: 'all', cats: [], price: null, disc: 0, rate: 0, sort: 'featured', shown: 24 };
+let shopState = { gender: 'all', cats: [], price: null, disc: 0, rate: 0, sort: 'featured', shown: 24, q: '' };
 
 const HEART_SVG = '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5C6.5 16.5 3 13.2 3 9.3 3 6.6 5.1 4.5 7.8 4.5c1.7 0 3.2.8 4.2 2.1 1-1.3 2.5-2.1 4.2-2.1 2.7 0 4.8 2.1 4.8 4.8 0 3.9-3.5 7.2-9 11.2z"/></svg>';
 const stars = r => '★'.repeat(Math.round(r)) + '☆'.repeat(5 - Math.round(r));
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 /* ================= Totals / badges ================= */
 function totals(){
   const sub = bag.reduce((s,l) => s + prod(l.id).price * l.qty, 0);
-  const disc = promo ? Math.round(sub * 0.10) : 0;
-  const ship = sub === 0 || (sub - disc) >= 120 ? 0 : 8;
-  return { sub, disc, ship, total: sub - disc + ship };
+  const c = promo ? COUPONS[promo] : null;
+  const disc = c && c.pct ? Math.round(sub * c.pct / 100) : 0;
+  const ship = sub === 0 || (sub - disc) >= 120 || (c && c.ship) ? 0 : 8;
+  return { sub, disc, ship, total: sub - disc + ship, code: promo };
 }
 function bagQty(){ return bag.reduce((s,l) => s + l.qty, 0); }
 function updateBadges(){
@@ -1386,16 +1467,35 @@ function colorStyle(p, colorName){
   return 'filter:' + (baseFilter ? baseFilter.trim() + ' ' : '') + 'hue-rotate(' + dh + 'deg) saturate(' + ds.toFixed(2) + ') brightness(' + db.toFixed(2) + ')' + flip;
 }
 const fmtCount = n => n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k' : '' + n;
+/* Live rating: blends shopper reviews written on this device into the shown score.
+   Each local review is weighted so it visibly moves the average. */
+function liveRating(p){
+  const agg = srv.online ? srv.ratings[p.id] : null;
+  const mine = myReviews[p.id] || [];
+  const W = 12;
+  let n = 0, sum = 0;
+  if (agg && agg.n) { n = agg.n; sum = agg.s; }
+  else if (mine.length) { n = mine.length; sum = mine.reduce((acc, r) => acc + r.stars, 0); }
+  if (!n) return { rating: p.rating, count: p.reviews };
+  const rating = Math.max(1, Math.min(5, (p.rating * p.reviews + sum * W) / (p.reviews + n * W)));
+  return { rating, count: p.reviews + n };
+}
+function recentHTML(excludeId){
+  const items = recent.filter(x => x !== excludeId).map(prod).filter(Boolean).slice(0, 3);
+  if (!items.length) return '';
+  return '<h2 style="margin:80px 0 28px">Recently viewed</h2><div class="grid3">' + items.map(x => cardHTML(x, { add:true })).join('') + '</div>';
+}
 function priceHTML(p){
   return `<span class="price">${money(p.price)}${p.mrp > p.price ? ` <s class="mrp">${money(p.mrp)}</s>` : ''}</span>${p.mrp > p.price ? `<em class="off">${p.off}% off</em>` : ''}`;
 }
 function cardHTML(p, o = {}){
+  const lr = liveRating(p);
   return `<div class="card">
     <button class="heart ${wish.includes(p.id) ? 'on' : ''}" data-wish="${p.id}" aria-label="Save ${p.name} to wishlist">${HEART_SVG}</button>
     <a class="ph" href="#/product/${p.id}">
       ${imgHTML(p)}
       ${p.tag ? '<span class="tag">' + p.tag + '</span>' : ''}
-      <span class="rate-chip">${p.rating.toFixed(1)} \u2605<i>\u00b7 ${fmtCount(p.reviews)}</i></span>
+      <span class="rate-chip">${lr.rating.toFixed(1)} \u2605<i>\u00b7 ${fmtCount(lr.count)}</i></span>
     </a>
     <div class="card-meta"><div><h3><a href="#/product/${p.id}">${p.name}</a></h3><p>${p.short}</p></div><div class="price-col">${priceHTML(p)}</div></div>
     ${o.add ? `<button class="add-btn" data-add="${p.id}">Add to bag</button>` : ''}
@@ -1407,18 +1507,29 @@ function filteredList(){
     (!shopState.cats.length || shopState.cats.includes(p.cat)) &&
     (!shopState.price || (p.price >= shopState.price[0] && p.price <= shopState.price[1])) &&
     (!shopState.disc || p.off >= shopState.disc) &&
-    (!shopState.rate || p.rating >= shopState.rate)
+    (!shopState.rate || liveRating(p).rating >= shopState.rate) &&
+    (!shopState.q || (p.name + ' ' + p.cat + ' ' + p.short).toLowerCase().includes(shopState.q))
   );
   const s = shopState.sort;
   if (s === 'low') list = list.slice().sort((a, b) => a.price - b.price);
   else if (s === 'high') list = list.slice().sort((a, b) => b.price - a.price);
-  else if (s === 'rating') list = list.slice().sort((a, b) => b.rating - a.rating);
+  else if (s === 'rating') list = list.slice().sort((a, b) => liveRating(b).rating - liveRating(a).rating);
   else if (s === 'discount') list = list.slice().sort((a, b) => b.off - a.off);
   else if (s === 'popular') list = list.slice().sort((a, b) => b.reviews - a.reviews);
   return list;
 }
 function renderShop(){
-  document.querySelectorAll('[data-count]').forEach(el => { el.textContent = PRODUCTS.filter(p => p.cat === el.dataset.count).length; });
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const cat = el.dataset.count;
+    const n = PRODUCTS.filter(p => p.cat === cat && (shopState.gender === 'all' || p.gender === shopState.gender || p.gender === 'unisex')).length;
+    el.textContent = n;
+    const lab = el.closest('label');
+    if (lab) lab.style.display = n ? '' : 'none';
+    if (!n && lab) {
+      const inp = lab.querySelector('input');
+      if (inp && inp.checked) { inp.checked = false; shopState.cats = shopState.cats.filter(x => x !== cat); }
+    }
+  });
   const list = filteredList();
   const show = list.slice(0, shopState.shown);
   $('#shop-count').textContent = list.length + ' styles';
@@ -1429,7 +1540,8 @@ function renderShop(){
   $('#load-more').hidden = show.length >= list.length;
 }
 function clearFilters(){
-  shopState.gender = 'all'; shopState.cats = []; shopState.price = null; shopState.disc = 0; shopState.rate = 0; shopState.shown = 24;
+  shopState.gender = 'all'; shopState.cats = []; shopState.price = null; shopState.disc = 0; shopState.rate = 0; shopState.q = ''; shopState.shown = 24;
+  const sq = $('#shop-q'); if (sq) sq.value = '';
   document.querySelectorAll('#filters input[type="checkbox"]').forEach(i => { i.checked = false; });
   document.querySelectorAll('#filters input[type="radio"]').forEach(i => { i.checked = ['all','0'].indexOf(i.dataset.fprice || i.dataset.fdisc || i.dataset.frate || i.dataset.fgender) >= 0; });
   renderShop();
@@ -1473,8 +1585,14 @@ function renderProduct(id){
     return;
   }
   pdpState = { id, size: p.sizes.includes('M') ? 'M' : p.sizes[0], qty: 1, color: p.colors[0][0] };
+  rfStars = 5;
+  recent = [id].concat(recent.filter(x => x !== id)).slice(0, 8);
+  try { localStorage.setItem('vlora-recent', JSON.stringify(recent)); } catch(e){}
   const rel = PRODUCTS.filter(x => x.cat === p.cat && x.id !== id).slice(0, 3);
-  const bars = ratingBars(p);
+  const lv = liveRating(p);
+  const bars = ratingBars({ rating: lv.rating });
+  const stock = srv.online && srv.stock[id] != null ? srv.stock[id] : hashSeed(id + 'stock') % 9 + 2;
+  const deliv = new Date(Date.now() + 6 * 864e5).toLocaleDateString(FX[CUR].locale, { weekday: 'short', day: 'numeric', month: 'short' });
   const revs = reviewsFor(p);
   const bought = fmtCount(Math.max(60, Math.round(p.reviews * 2.4)));
   w.innerHTML = `
@@ -1483,9 +1601,11 @@ function renderProduct(id){
       <div class="pdp-ph">${p.tag ? '<span class="tag">' + p.tag + '</span>' : ''}${imgHTML(p)}</div>
       <div>
         <h1>${p.name}</h1>
-        <p class="rating"><span class="stars">${stars(p.rating)}</span> ${p.rating.toFixed(1)} \u00b7 ${fmtCount(p.reviews)} reviews</p>
+        <p class="rating"><span class="stars">${stars(lv.rating)}</span> ${lv.rating.toFixed(1)} \u00b7 ${fmtCount(lv.count)} reviews</p>
         <p class="pdp-price">${money(p.price)}${p.mrp > p.price ? ` <s class="mrp">${money(p.mrp)}</s> <em class="off">(${p.off}% off)</em>` : ''}</p>
         <p class="tax-note">Inclusive of all taxes \u00b7 \u273a ${bought} bought this month</p>
+        ${stock === 0 ? `<p class="stock-note">Out of stock \u2014 more on the way</p>` : stock <= 5 ? `<p class="stock-note">Only ${stock} left in stock \u2014 order soon</p>` : ''}
+        <p class="deliv-note">Estimated delivery: <b>${deliv}</b> \u00b7 free 60-day returns</p>
         <p class="pdp-desc">${p.desc}</p>
         <p class="opt-lbl">Color \u2014 <span id="color-name">${pdpState.color}</span></p>
         <div class="swatches">${p.colors.map(c => `<button class="swatch ${c[0] === pdpState.color ? 'active' : ''}" style="background:${c[1]}" data-color="${c[0]}" aria-label="Color ${c[0]}"></button>`).join('')}</div>
@@ -1493,7 +1613,7 @@ function renderProduct(id){
         <div class="sizes">${p.sizes.map(s => `<button class="size-pill ${s === pdpState.size ? 'active' : ''}" data-size="${s}">${s}</button>`).join('')}</div>
         <div class="pdp-row">
           <span class="qty"><button data-pq="-1" aria-label="Decrease quantity">\u2212</button><span id="pdp-qty">1</span><button data-pq="1" aria-label="Increase quantity">+</button></span>
-          <button class="btn terra" style="flex:1" data-add-pdp="${p.id}">Add to bag \u2014 ${money(p.price)}</button>
+          <button class="btn terra" style="flex:1" data-add-pdp="${p.id}"${stock === 0 ? ' disabled' : ''}>${stock === 0 ? 'Out of stock' : `Add to bag \u2014 ${money(p.price)}`}</button>
         </div>
         <button class="wish-line ${wish.includes(p.id) ? 'on' : ''}" data-wish="${p.id}">${HEART_SVG} <span>Save to wishlist</span></button>
         <div style="margin-top:20px">
@@ -1507,17 +1627,26 @@ function renderProduct(id){
       <h2 style="margin:0 0 28px">What shoppers say</h2>
       <div class="rev-grid">
         <div class="rev-score">
-          <b>${p.rating.toFixed(1)} \u2605</b>
-          <p class="rs-sub">${fmtCount(p.reviews)} verified ratings</p>
+          <b>${lv.rating.toFixed(1)} \u2605</b>
+          <p class="rs-sub">${fmtCount(lv.count)} verified ratings</p>
           ${[5, 4, 3, 2, 1].map((s, i) => `<div class="rbar-row"><span>${s} \u2605</span><div class="rbar"><div style="width:${bars[i]}%"></div></div><span>${bars[i]}%</span></div>`).join('')}
         </div>
         <div>
+          <form id="review-form" class="rev-form" data-rev-pid="${p.id}">
+            <div class="rf-head"><b>Write a review</b><span class="rf-stars">${[1,2,3,4,5].map(s => `<button type="button" data-rstar="${s}" aria-label="Rate ${s} of 5">${s <= rfStars ? '\u2605' : '\u2606'}</button>`).join('')}</span></div>
+            ${session ? '' : '<div class="field"><label for="rf-name">Your name</label><input id="rf-name" required placeholder="Your name"></div>'}
+            <div class="field"><label for="rf-text">Your review</label><textarea id="rf-text" required placeholder="How is the fit, fabric and color?"></textarea></div>
+            <button class="btn terra" type="submit">Post review</button>
+          </form>
+          <div id="live-revs" data-pid="${p.id}">${(myReviews[id] || []).map(rv => `<div class="rev-card"><div class="rc-h"><b>${esc(rv.name)}</b><span class="rc-badge you">Your review</span><span class="rc-date">${rv.date}</span></div><span class="stars">${'\u2605'.repeat(rv.stars)}${'\u2606'.repeat(5 - rv.stars)}</span><p>${esc(rv.text)}</p></div>`).join('')}</div>
           ${revs.map(rv => `<div class="rev-card"><div class="rc-h"><b>${rv.name}</b><span class="rc-badge">Verified buyer</span><span class="rc-date">${rv.date}</span></div><span class="stars">${'\u2605'.repeat(rv.stars)}${'\u2606'.repeat(5 - rv.stars)}</span><p>${rv.text}</p></div>`).join('')}
         </div>
       </div>
     </div>
     <h2 style="margin:80px 0 28px">You may also like</h2>
-    <div class="grid3">${rel.map(x => cardHTML(x, { add:true })).join('')}</div>`;
+    <div class="grid3">${rel.map(x => cardHTML(x, { add:true })).join('')}</div>
+    ${recentHTML(id)}`;
+  loadLiveReviews(id);
 }
 
 /* ================= Wishlist page ================= */
@@ -1570,10 +1699,10 @@ function renderCheckout(){
       <aside class="summary">
         <h2>Order summary</h2>
         ${bag.map(l => { const p = prod(l.id); return `<div class="sum-item">${imgHTML(p, '')}<div><div class="n">${p.name}</div><div class="m">${l.color ? l.color + ' · ' : ''}${l.size && l.size !== 'One size' ? 'Size ' + l.size + ' · ' : ''}Qty ${l.qty}</div></div><span class="p">${money(p.price * l.qty)}</span></div>`; }).join('')}
-        <div class="promo-row"><label for="promo-input" class="sr-only">Promo code</label><input id="promo-input" placeholder="Promo code" value="${promo ? 'SUNNY10' : ''}"><button class="btn ghost" type="button" data-apply-promo>Apply</button></div>
-        <p class="promo-msg ${promo ? 'ok' : ''}" id="promo-msg">${promo ? 'SUNNY10 applied — 10% off ✓' : ''}</p>
+        <div class="promo-row"><label for="promo-input" class="sr-only">Promo code</label><input id="promo-input" placeholder="Try SUNNY10, BRIGHT15, VLORA20…" value="${promo || ''}"><button class="btn ghost" type="button" data-apply-promo>Apply</button></div>
+        <p class="promo-msg ${promo ? 'ok' : ''}" id="promo-msg">${promo ? promo + ' applied — ' + COUPONS[promo].desc + ' ✓' : ''}</p>
         <div class="sum-line"><span>Subtotal</span><span>${money(t.sub)}</span></div>
-        ${t.disc ? '<div class="sum-line disc"><span>Discount (SUNNY10)</span><span>−' + money(t.disc) + '</span></div>' : ''}
+        ${t.disc ? '<div class="sum-line disc"><span>Discount (' + t.code + ')</span><span>−' + money(t.disc) + '</span></div>' : ''}
         <div class="sum-line"><span>Shipping</span><span>${t.ship === 0 ? 'Free' : money(t.ship)}</span></div>
         <div class="sum-total"><span>Total</span><span>${money(t.total)}</span></div>
       </aside>
@@ -1584,11 +1713,15 @@ function placeOrder(){
   lastOrder = {
     num: 'VL-' + Math.floor(10000 + Math.random() * 90000),
     email: $('#co-email').value,
+    date: new Date().toISOString(),
     items: bag.map(l => ({ ...l })),
     t
   };
+  orders.unshift(lastOrder);
+  try { localStorage.setItem('vlora-orders', JSON.stringify(orders)); } catch(e){}
+  if (API) api('/api/orders', { num: lastOrder.num, email: lastOrder.email, order: lastOrder }).then(() => refreshLive()).catch(() => {});
   sendEmail('order', { to: lastOrder.email, num: lastOrder.num, items: lastOrder.items, t: lastOrder.t });
-  bag = []; promo = false; persist(); updateBadges();
+  bag = []; promo = null; persist(); updateBadges();
   location.hash = '#/confirmation';
 }
 function renderConfirmation(){
@@ -1606,7 +1739,7 @@ function renderConfirmation(){
       <div class="order-card">
         <p class="num">Order ${o.num}</p>
         ${o.items.map(l => { const p = prod(l.id); return `<div class="sum-item">${imgHTML(p, '')}<div><div class="n">${p.name}</div><div class="m">${l.color ? l.color + ' · ' : ''}${l.size && l.size !== 'One size' ? 'Size ' + l.size + ' · ' : ''}Qty ${l.qty}</div></div><span class="p">${money(p.price * l.qty)}</span></div>`; }).join('')}
-        ${o.t.disc ? '<div class="sum-line disc"><span>Discount (SUNNY10)</span><span>−' + money(o.t.disc) + '</span></div>' : ''}
+        ${o.t.disc ? '<div class="sum-line disc"><span>Discount (' + (o.t.code || 'promo') + ')</span><span>−' + money(o.t.disc) + '</span></div>' : ''}
         <div class="sum-line"><span>Shipping</span><span>${o.t.ship === 0 ? 'Free' : money(o.t.ship)}</span></div>
         <div class="sum-total"><span>Total</span><span>${money(o.t.total)}</span></div>
       </div>
@@ -1617,14 +1750,85 @@ function renderConfirmation(){
     </div>`;
 }
 
-/* ================= Email notifications ================= */
-/* No email keys live in this website at all — not here, not in any file you publish.
-   Emails are sent through your private Cloudflare Worker (see vlora-email-worker.js),
-   which keeps the EmailJS keys as encrypted environment variables on Cloudflare.
+/* ================= Order history ================= */
+function renderOrders(){
+  const w = $('#orders-wrap');
+  if (API && session && session.token) {
+    api('/api/orders').then(d => {
+      const list = (d.orders || []).map(o => o.order || o).filter(o => o && o.items);
+      if (list.length && parseRoute().view === 'orders') w.innerHTML = orderCardsHTML(list);
+    }).catch(() => {});
+  }
+  if (!orders.length) {
+    w.innerHTML = '<div class="empty-state"><h2>No orders yet</h2><p>Your order history will appear here after your first purchase.</p><a class="btn terra" href="#/shop">Shop the collection</a></div>';
+    return;
+  }
+  w.innerHTML = orderCardsHTML(orders);
+}
+function orderCardsHTML(list){
+  return list.map(o => {
+    const when = o.date ? new Date(o.date).toLocaleDateString(FX[CUR].locale, { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+    const days = o.date ? (Date.now() - new Date(o.date).getTime()) / 864e5 : 99;
+    const badge = days > 7 ? 'Delivered ✓' : 'On its sunny way ☀';
+    return `<div class="order-card ohist">
+      <div class="oh-head"><p class="num">Order ${o.num}</p><span class="oh-date">${when}</span><span class="oh-badge">${badge}</span></div>
+      ${o.items.map(l => { const p = prod(l.id); return p ? `<div class="sum-item">${imgHTML(p, '')}<div><div class="n">${p.name}</div><div class="m">${l.color ? l.color + ' \u00b7 ' : ''}${l.size && l.size !== 'One size' ? 'Size ' + l.size + ' \u00b7 ' : ''}Qty ${l.qty}</div></div><span class="p">${money(p.price * l.qty)}</span></div>` : ''; }).join('')}
+      ${o.t && o.t.disc ? '<div class="sum-line disc"><span>Discount (' + (o.t.code || 'promo') + ')</span><span>−' + money(o.t.disc) + '</span></div>' : ''}
+      <div class="sum-line"><span>Shipping</span><span>${o.t.ship === 0 ? 'Free' : money(o.t.ship)}</span></div>
+      <div class="sum-total"><span>Total</span><span>${money(o.t.total)}</span></div>
+    </div>`;
+  }).join('');
+}
+
+/* ================= Backend (Cloudflare Worker + D1) ================= */
+/* No secret keys live in this website at all — not here, not in any file you publish.
+   Emails, accounts, shared reviews, orders and live stock all go through your private
+   Cloudflare Worker (see vlora-backend-worker.js), which keeps every secret as an
+   encrypted variable on Cloudflare and stores data in a free D1 database.
    After deploying the Worker, paste its URL below, e.g.
      const EMAIL_ENDPOINT = 'https://vlora-email.YOUR-SUBDOMAIN.workers.dev';
-   The Worker URL is safe to publish — it contains no secrets. */
+   The Worker URL is safe to publish — it contains no secrets.
+   If it is empty, the site still works fully using this browser's local storage. */
 const EMAIL_ENDPOINT = 'https://vlora-email.neerajraopotlapalli5.workers.dev/';
+const API = EMAIL_ENDPOINT ? (EMAIL_ENDPOINT.endsWith('/') ? EMAIL_ENDPOINT.slice(0, -1) : EMAIL_ENDPOINT) : '';
+let srv = { ratings: {}, stock: {}, online: false };
+async function api(path, body){
+  if (!API) throw new Error('offline');
+  const headers = { 'Content-Type': 'application/json' };
+  if (session && session.token) headers['Authorization'] = 'Bearer ' + session.token;
+  const res = await fetch(API + path, { method: body ? 'POST' : 'GET', headers, body: body ? JSON.stringify(body) : undefined });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || 'Something went wrong — please try again.');
+  return data;
+}
+async function refreshLive(){
+  if (!API) return;
+  try {
+    const d = await api('/api/summary');
+    srv.ratings = d.ratings || {}; srv.stock = d.stock || {};
+    const first = !srv.online;
+    srv.online = true;
+    const r = parseRoute();
+    if (r.view === 'shop') renderShop();
+    if (first && r.view === 'product' && r.id) { const y = window.scrollY; renderProduct(r.id); window.scrollTo(0, y); }
+  } catch(e) { srv.online = false; }
+}
+setTimeout(refreshLive, 300);
+setInterval(refreshLive, 20000);
+async function loadLiveReviews(pid){
+  if (!API) return;
+  try {
+    const d = await api('/api/reviews?pid=' + encodeURIComponent(pid));
+    const box = $('#live-revs');
+    if (!box || box.dataset.pid !== pid || !(d.reviews || []).length) return;
+    const meName = session ? (session.name || session.email) : null;
+    box.innerHTML = d.reviews.map(rv => {
+      const when = rv.created ? new Date(rv.created.replace(' ', 'T') + 'Z').toLocaleDateString(FX[CUR].locale, { month: 'long', year: 'numeric' }) : '';
+      const own = meName && rv.name === meName;
+      return `<div class="rev-card"><div class="rc-h"><b>${esc(rv.name)}</b><span class="rc-badge ${own ? 'you' : ''}">${own ? 'Your review' : 'Community'}</span><span class="rc-date">${when}</span></div><span class="stars">${'\u2605'.repeat(rv.stars)}${'\u2606'.repeat(5 - rv.stars)}</span><p>${esc(rv.text)}</p></div>`;
+    }).join('');
+  } catch(e){}
+}
 let lastEmail = null;
 function emailBody(type, d){
   const wrap = inner => `<div style="font-family:Georgia,serif;background:#FFFDF8;color:#2C2C2B;padding:26px;border:1px solid #E7E0D3;border-radius:12px">
@@ -1634,7 +1838,7 @@ function emailBody(type, d){
   if (type === 'signin') return { subject: 'New sign-in to your Vlora account', html: wrap(`<h2 style="font-weight:400;margin:0 0 10px">Hi ${d.name},</h2><p>Your Vlora account was signed in on <b>${new Date().toLocaleString()}</b>.</p><p style="color:#6F6A63">If this wasn’t you, please change your password right away.</p>`) };
   const rows = d.items.map(l => { const p = prod(l.id); return `<tr><td style="padding:8px 0;border-bottom:1px solid #E7E0D3">${p.name}<br><span style="color:#6F6A63;font-size:13px">${l.color ? l.color + ' · ' : ''}${l.size && l.size !== 'One size' ? 'Size ' + l.size + ' · ' : ''}Qty ${l.qty}</span></td><td style="text-align:right;border-bottom:1px solid #E7E0D3">${money(p.price * l.qty)}</td></tr>`; }).join('');
   return { subject: `Your Vlora order ${d.num} is confirmed ☀`, html: wrap(`<h2 style="font-weight:400;margin:0 0 10px">Thank you for your order!</h2><p>Order <b>${d.num}</b> is confirmed and will arrive in 5–7 days, in plastic-free packaging with a repair kit inside.</p><table style="width:100%;border-collapse:collapse">${rows}</table>
-    ${d.t.disc ? `<p style="margin:10px 0 0;color:#6E7F63">Discount (SUNNY10): −${money(d.t.disc)}</p>` : ''}
+    ${d.t.disc ? `<p style="margin:10px 0 0;color:#6E7F63">Discount (${d.t.code || 'promo'}): −${money(d.t.disc)}</p>` : ''}
     <p style="margin:10px 0 0">Shipping: ${d.t.ship === 0 ? 'Free' : money(d.t.ship)}</p>
     <p style="font-size:18px;margin:6px 0 0"><b>Total: ${money(d.t.total)}</b></p>`) };
 }
@@ -1646,7 +1850,7 @@ function sendEmail(type, d){
     fetch(EMAIL_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ to_email: mail.to, subject: mail.subject, message_html: mail.html }) }).catch(err => console.warn('[Vlora] Email could not be sent:', err));
     return;
   }
-  console.warn('[Vlora] Email to ' + mail.to + ' was NOT delivered — demo mode. Deploy vlora-email-worker.js on Cloudflare (free) and paste your Worker URL into EMAIL_ENDPOINT near the top of the email section.');
+  console.warn('[Vlora] Email to ' + mail.to + ' was NOT delivered — demo mode. Deploy vlora-backend-worker.js on Cloudflare (free) and paste your Worker URL into EMAIL_ENDPOINT near the top of the email section.');
 }
 function openMail(){
   if (!lastEmail) return;
@@ -1677,7 +1881,7 @@ function renderSearch(q){
   const res = PRODUCTS.filter(p => (p.name + ' ' + p.cat + ' ' + p.short).toLowerCase().includes(q));
   box.innerHTML = res.length
     ? `<p class="sr-hint">${res.length} ${res.length === 1 ? 'match' : 'matches'}</p>` +
-      res.slice(0, 10).map(p => `<a class="sr-item" href="#/product/${p.id}" data-close-search>${imgHTML(p, '')}<div><div class="n">${p.name}</div><div class="m">${p.short} \u00b7 ${p.rating.toFixed(1)} \u2605</div></div><span class="p">${money(p.price)}</span></a>`).join('') +
+      res.slice(0, 10).map(p => `<a class="sr-item" href="#/product/${p.id}" data-close-search>${imgHTML(p, '')}<div><div class="n">${p.name}</div><div class="m">${p.short} \u00b7 ${liveRating(p).rating.toFixed(1)} \u2605</div></div><span class="p">${money(p.price)}</span></a>`).join('') +
       (res.length > 10 ? '<p class="sr-hint">\u2026and ' + (res.length - 10) + ' more in the shop</p>' : '')
     : '<p class="sr-hint">No matches for \u201c' + q.replace(/</g, '&lt;') + '\u201d \u2014 try \u201clinen\u201d or \u201cdress\u201d.</p>';
 }
@@ -1710,6 +1914,7 @@ function renderAuth(){
       <h2>Hi, ${firstName()} ☀</h2>
       <p class="auth-sub">You’re signed in as ${session.email}</p>
       <a class="btn terra" style="width:100%;margin-bottom:10px" href="#/wishlist" data-close-auth>My wishlist</a>
+      <a class="btn ghost" style="width:100%;margin-bottom:10px" href="#/orders" data-close-auth>My orders</a>
       <a class="btn ghost" style="width:100%;margin-bottom:10px" href="#/shop" data-close-auth>Keep shopping</a>
       <button class="btn ghost" style="width:100%" data-signout>Sign out</button>`;
     return;
@@ -1735,7 +1940,7 @@ function syncAccountUI(){
   if (!btn) return;
   if (session) {
     btn.innerHTML = '<span class="acct-chip">' + (session.name || session.email).trim()[0].toUpperCase() + '</span>';
-    menu.innerHTML = `<p>Signed in as<b>${session.name || session.email}</b></p><a href="#/wishlist">My wishlist ♥</a><a href="#/shop">Keep shopping</a><button data-signout>Sign out</button>`;
+    menu.innerHTML = `<p>Signed in as<b>${session.name || session.email}</b></p><a href="#/wishlist">My wishlist ♥</a><a href="#/orders">My orders</a><a href="#/shop">Keep shopping</a><button data-signout>Sign out</button>`;
   } else {
     btn.innerHTML = USER_SVG;
     menu.innerHTML = '';
@@ -1749,7 +1954,7 @@ function parseRoute(){
   const h = (location.hash || '').replace(/^#\/?/, '');
   if (h.startsWith('product/')) return { view:'product', id: h.slice(8) };
   if (h === 'shop/women' || h === 'shop/men') return { view:'shop', gender: h.slice(5) };
-  const known = ['home','collection','shop','story','values','journal','wishlist','checkout','confirmation'];
+  const known = ['home','collection','shop','story','values','journal','wishlist','checkout','confirmation','orders'];
   return { view: known.includes(h) ? h : 'home' };
 }
 function route(){
@@ -1771,6 +1976,8 @@ function route(){
   if (r.view === 'wishlist') renderWishlist();
   if (r.view === 'checkout') renderCheckout();
   if (r.view === 'confirmation') renderConfirmation();
+  if (r.view === 'orders') renderOrders();
+  if (r.view === 'home') renderStatic();
   window.scrollTo(0, 0);
   revealVisible();
 }
@@ -1780,6 +1987,7 @@ window.addEventListener('hashchange', route);
 document.addEventListener('click', (e) => {
   const t = e.target;
   if (!t.closest('.acct-wrap')) { const am = $('#acct-menu'); if (am) am.classList.remove('open'); }
+  if (t.closest('#theme-btn')) { const dark = !document.body.classList.contains('dark'); try { localStorage.setItem('vlora-theme', dark ? 'dark' : 'light'); } catch(err){} applyTheme(); showToast(dark ? 'Dark mode on \uD83C\uDF19' : 'Light mode on \u2600'); return; }
   if (t.closest('#cur-btn')) { setCurrency(CUR === 'INR' ? 'USD' : 'INR'); return; }
   if (t.closest('[data-toggle-cur]')) { e.preventDefault(); $('#drawer').classList.remove('open'); setCurrency(CUR === 'INR' ? 'USD' : 'INR'); return; }
   if (t.closest('#acct-btn')) { if (session) { $('#acct-menu').classList.toggle('open'); } else { openAuth('signin'); } return; }
@@ -1814,34 +2022,75 @@ document.addEventListener('click', (e) => {
   if (chip) { shopState.filter = chip.dataset.filter; document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === chip)); renderShop(); return; }
   if (t.closest('[data-apply-promo]')) {
     const v = ($('#promo-input').value || '').trim().toUpperCase();
-    if (v === 'SUNNY10') { promo = true; renderCheckout(); showToast('Promo applied — 10% off ✓'); }
-    else { promo = false; const m = $('#promo-msg'); m.textContent = v ? '“' + v + '” isn’t a valid code' : 'Enter a code first'; m.className = 'promo-msg err'; }
+    const c = COUPONS[v];
+    if (c && (!c.min || totals().sub >= c.min)) { promo = v; renderCheckout(); showToast('Promo applied — ' + c.desc + ' ✓'); }
+    else {
+      const had = promo; promo = null;
+      if (had) renderCheckout();
+      const m = $('#promo-msg'); m.textContent = !v ? 'Enter a code first' : (c ? v + ' needs a subtotal of at least ' + money(c.min) : '“' + v + '” isn’t a valid code'); m.className = 'promo-msg err';
+      if (v) { const pi = $('#promo-input'); if (pi) pi.value = v; }
+    }
     return;
   }
 });
 document.addEventListener('change', e => { if (e.target.id === 'sort') { shopState.sort = e.target.value; renderShop(); } });
-document.addEventListener('input', e => { if (e.target.id === 'search-input') renderSearch(e.target.value); });
+document.addEventListener('input', e => {
+  if (e.target.id === 'search-input') renderSearch(e.target.value);
+  if (e.target.id === 'shop-q') { shopState.q = e.target.value.trim().toLowerCase(); shopState.shown = 24; renderShop(); }
+});
 document.addEventListener('submit', e => {
   if (e.target.id === 'checkout-form') { e.preventDefault(); placeOrder(); return; }
+  if (e.target.id === 'review-form') {
+    e.preventDefault();
+    const pid = e.target.dataset.revPid;
+    const name = session ? (session.name || session.email) : ($('#rf-name') ? $('#rf-name').value.trim() : '');
+    const text = $('#rf-text').value.trim();
+    if (!name || !text) return;
+    (myReviews[pid] = myReviews[pid] || []).unshift({ name, text, stars: rfStars, date: new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' }) });
+    try { localStorage.setItem('vlora-reviews', JSON.stringify(myReviews)); } catch(err){}
+    if (API) api('/api/reviews', { pid, name, text, stars: rfStars }).then(() => refreshLive()).then(() => loadLiveReviews(pid)).catch(() => {});
+    const y = window.scrollY; renderProduct(pid); window.scrollTo(0, y);
+    showToast('Thanks! Your review is live ★');
+    return;
+  }
   if (e.target.id === 'auth-form') {
     e.preventDefault();
     const email = $('#au-email').value.trim().toLowerCase();
     const pass = $('#au-pass').value;
     const msg = $('#auth-msg');
+    const finish = (welcome) => {
+      saveAuth(); syncAccountUI(); closeAuth();
+      showToast((welcome ? 'Welcome to Vlora, ' : 'Welcome back, ') + firstName() + ' ☀');
+      setTimeout(() => sendEmail(welcome ? 'welcome' : 'signin', { to: email, name: session.name || firstName() }), 1600);
+      refreshLive();
+    };
+    if (API) {
+      const btn = e.target.querySelector('button[type="submit"]');
+      const orig = btn ? btn.textContent : '';
+      if (btn) { btn.disabled = true; btn.textContent = 'One moment…'; }
+      const req = authMode === 'signup'
+        ? api('/api/signup', { name: $('#au-name').value.trim(), email, pass })
+        : api('/api/signin', { email, pass });
+      req.then(d => {
+        session = { email: d.email || email, name: d.name || '', token: d.token };
+        finish(authMode === 'signup');
+      }).catch(err => {
+        if (btn) { btn.disabled = false; btn.textContent = orig; }
+        msg.textContent = err.message === 'offline' ? 'You appear to be offline — please try again.' : err.message;
+        msg.className = 'auth-msg err';
+      });
+      return;
+    }
     if (authMode === 'signup') {
       if (users[email]) { msg.textContent = 'That email already has an account — try signing in.'; msg.className = 'auth-msg err'; return; }
       users[email] = { name: $('#au-name').value.trim(), pass };
       session = { email, name: users[email].name };
-      saveAuth(); syncAccountUI(); closeAuth();
-      showToast('Welcome to Vlora, ' + firstName() + ' ☀');
-      setTimeout(() => sendEmail('welcome', { to: email, name: session.name || firstName() }), 1600);
+      finish(true);
     } else {
       const u = users[email];
       if (!u || u.pass !== pass) { msg.textContent = 'That email and password don’t match.'; msg.className = 'auth-msg err'; return; }
       session = { email, name: u.name };
-      saveAuth(); syncAccountUI(); closeAuth();
-      showToast('Welcome back, ' + firstName() + ' ☀');
-      setTimeout(() => sendEmail('signin', { to: email, name: session.name || firstName() }), 1600);
+      finish(false);
     }
   }
 });
@@ -1850,6 +2099,8 @@ document.addEventListener('click', e => {
   if (el.closest('[data-close-mail]') || el.id === 'mail-ov') closeMail();
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeBag(); closeSearch(); closeAuth(); closeMail(); } });
+window.addEventListener('scroll', () => { const b = $('#top-btn'); if (b) b.classList.toggle('show', window.scrollY > 600); }, { passive: true });
+document.addEventListener('click', e => { if (e.target.closest('#top-btn')) window.scrollTo({ top: 0, behavior: 'smooth' }); });
 $('#menu-btn').addEventListener('click', () => {
   const open = $('#drawer').classList.toggle('open');
   $('#menu-btn').setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -1861,6 +2112,8 @@ document.addEventListener('click', e => {
   if (t.closest('#load-more')) { shopState.shown += 24; renderShop(); return; }
   if (t.closest('[data-toggle-filters]')) { $('#filters').classList.toggle('open'); return; }
   if (t.closest('[data-clear-filters]')) { clearFilters(); return; }
+  const rs = t.closest('[data-rstar]');
+  if (rs) { rfStars = +rs.dataset.rstar; document.querySelectorAll('[data-rstar]').forEach(b => { b.textContent = +b.dataset.rstar <= rfStars ? '\u2605' : '\u2606'; }); return; }
 });
 document.addEventListener('change', e => {
   const el = e.target;
@@ -1893,10 +2146,25 @@ function revealVisible(){
   }
 }
 
+/* ================= Theme ================= */
+function applyTheme(){
+  let dark = false;
+  try { dark = localStorage.getItem('vlora-theme') === 'dark'; } catch(e){}
+  document.body.classList.toggle('dark', dark);
+  const b = $('#theme-btn'); if (b) b.textContent = dark ? '\u2600\uFE0F' : '\uD83C\uDF19';
+}
+applyTheme();
+
 /* ================= Init ================= */
 function renderStatic(){
   $('#home-grid').innerHTML = PRODUCTS.slice(0, 3).map(p => cardHTML(p)).join('');
   $('#collection-grid').innerHTML = PRODUCTS.slice(0, 6).map(p => cardHTML(p)).join('');
+  const rsec = $('#recent-sec'), rg = $('#recent-grid');
+  if (rsec && rg) {
+    const ritems = recent.map(prod).filter(Boolean).slice(0, 3);
+    rsec.hidden = !ritems.length;
+    rg.innerHTML = ritems.map(p => cardHTML(p, { add:true })).join('');
+  }
 }
 renderStatic();
 syncCurrencyUI();
